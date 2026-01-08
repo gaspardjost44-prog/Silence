@@ -33,25 +33,36 @@
     opacity: 0.8;
   }
 
-  /* Contenu centré */
-  .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;/* au lieu de center */
-    align-items: center;
-    height: 100vh; /* plein écran */
-    text-align: center;
-    padding: 10px 20px; /* réduit l'écart entre bordure du haut et texte*/
-    box-sizing: border-box;
+.main {
+    display: flex;             
+    flex-direction: column;    
+    justify-content: flex-start; 
+    align-items: center;       
+    height: 100vh;             
+    text-align: center;        
+    padding: 20px;             
+    box-sizing: border-box;    
+    position: relative;         /* nécessaire pour le pseudo-élément */
+    z-index: 1;                 /* texte au-dessus de l'image */
+}
 
-  /* Image de fond */
+.main::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25%;                /* taille comme tu voulais pour ton img */
+    transform: translate(-50%, -50%) rotate(-90deg); /* centré + rotation */
+    height: auto;
     background-image: url("images/IMG_1835-removebg-preview.png");
-    background-size: contain;        /* l'image garde sa taille réelle et ratio */
-    background-position: center;     /* centré horizontalement et verticalement */
-    background-repeat: no-repeat;    /* pas de répétition */
-    transform: rotate(-90deg);       /* si tu veux la faire pivoter */
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1;               /* derrière le texte */
+    opacity: 0.3;              /* optionnel : pour que l'image ne gêne pas le texte */
+}
 
-  }
+
+  
 
   h1 {
     font-size: 60px;
