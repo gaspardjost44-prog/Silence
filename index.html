@@ -94,6 +94,19 @@
       font-size: 32px;
       letter-spacing: 4px;
     }
+    .main-image {
+  max-width: 80%;      /* taille max après rotation */
+  width: 100%;          /* responsive */
+  height: auto;         /* garde les proportions */
+  border-radius: 12px;  /* coins arrondis */
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  transform: rotate(90deg); /* <--- c’est ici que tu redresses l’image */
+}
+
     .subtitle {
       font-size: 12px;
       letter-spacing: 2px;
