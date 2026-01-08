@@ -9,7 +9,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: "Brush Script MT", cursive, sans-serif;
+    font-family: "Helvetica Neue", Arial, sans-serif; /* police clean, moderne, luxe */
     background: #36bfcf;
     color: #111;
 }
@@ -29,8 +29,8 @@ body {
     border-radius: 20px;
     text-decoration: none;
     color: #111;
-    font-size: 14px;
-    letter-spacing: 1px;
+    font-size: 13px;
+    letter-spacing: 2px;
     transition: all 0.3s ease;
 }
 
@@ -47,7 +47,7 @@ body {
     align-items: center;
     height: 100vh;
     text-align: center;
-    padding: 60px 20px 20px; /* espace top pour respirer */
+    padding: 80px 20px 20px; /* plus d’air en haut */
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
@@ -65,64 +65,50 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     transform: translate(-50%, -50%) rotate(-90deg);
-    opacity: 0.25;
+    opacity: 0.2;
     z-index: -1;
 }
 
-/* ================== TITRES ================== */
+/* ================== TITRE ================== */
 h1 {
-    font-size: 60px;
-    font-weight: 400;
-    margin: 0 0 10px 0;
-    letter-spacing: 8px;
+    font-size: 64px;
+    font-weight: 300;
+    margin: 0 0 20px 0;
+    letter-spacing: 10px;
 }
 
+/* ================== SOUS-TITRE ================== */
 .subtitle {
-    font-size: 14px;
+    font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 4px;
-    margin-bottom: 40px;
+    letter-spacing: 5px;
+    margin-bottom: 60px; /* plus d’espace = plus de respiration */
 }
 
 /* ================== TEXTE ================== */
 .desc {
-    font-size: 16px;
-    line-height: 1.6;
-    max-width: 600px;
-}
-
-/* ================== BOUTON PRINCIPAL ================== */
-a.button-link {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 12px 28px;
-    border: 2px solid #111;
-    border-radius: 30px;
-    text-decoration: none;
-    color: #111;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-}
-
-a.button-link:hover {
-    background: #111;
-    color: white;
+    font-size: 17px;
+    line-height: 2.1;          /* ← AÉRATION PRINCIPALE */
+    max-width: 620px;
+    letter-spacing: 0.3px;    /* subtil mais très premium */
 }
 
 /* ================== RESPONSIVE ================== */
 @media (max-width: 600px) {
     h1 {
-        font-size: 32px;
-        letter-spacing: 4px;
+        font-size: 36px;
+        letter-spacing: 5px;
     }
 
     .subtitle {
-        font-size: 12px;
-        letter-spacing: 2px;
+        font-size: 11px;
+        letter-spacing: 3px;
+        margin-bottom: 40px;
     }
 
     .desc {
-        font-size: 14px;
+        font-size: 15px;
+        line-height: 1.9;
     }
 
     .main::before {
@@ -145,12 +131,10 @@ a.button-link:hover {
     <div class="subtitle">Grandir en silence</div>
 
     <div class="desc">
-        Bienvenue sur SILENCE, une marque pour ceux qui aiment la simplicité et le calme.<br>
-        Nous sommes une marque indépendante française actuellement en cours de création.
-        Nous travaillons avec exigence pour vous proposer des produits sobres, durables et essentiels.
+        Bienvenue sur SILENCE, une marque pensée pour ceux qui recherchent la simplicité, le calme et l’essentiel.<br><br>
+        Nous sommes une marque indépendante française actuellement en cours de création, guidée par l’envie de proposer des pièces sobres, durables et intemporelles.<br><br>
+        Chaque détail est réfléchi pour laisser place à l’essentiel : le confort, la qualité et le silence.
     </div>
-
-    <a href="produit.html" class="button-link">Voir la collection</a>
 </div>
 
 </body>
