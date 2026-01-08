@@ -3,141 +3,155 @@
 <head>
 <meta charset="UTF-8">
 <title>SILENCE – Accueil</title>
+
 <style>
-  body {
+/* ================== BASE ================== */
+body {
     margin: 0;
     padding: 0;
-    font-family: Brush Script, sans-serif;
+    font-family: "Brush Script MT", cursive, sans-serif;
     background: #36bfcf;
     color: #111;
-  }
+}
 
-  /* Onglet Produit en haut à gauche */
-  .sidebar {
+/* ================== BOUTON TOP LEFT ================== */
+.sidebar {
     position: fixed;
     top: 20px;
     left: 20px;
-    background: #111;
-    padding: 10px 20px;
-    border-radius: 5px;
-  }
-
-  .sidebar a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 14px;
-  }
-
-  .sidebar a:hover {
-    opacity: 0.8;
-  }
-.main {
-    display: flex;             
-    flex-direction: column;    
-    justify-content: flex-start; 
-    align-items: center;       
-    height: 100vh;             
-    text-align: center;        
-    padding: 20px;             
-    box-sizing: border-box;    
-    position: relative;         /* nécessaire pour ::before */
-    z-index: 1;                 /* texte au-dessus de l'image */
+    z-index: 10;
 }
 
+.sidebar a {
+    display: inline-block;
+    padding: 10px 22px;
+    border: 2px solid #111;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #111;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.sidebar a:hover {
+    background: #111;
+    color: white;
+}
+
+/* ================== CONTENU PRINCIPAL ================== */
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 60px 20px 20px; /* espace top pour respirer */
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ================== IMAGE ARRIÈRE-PLAN ================== */
 .main::before {
     content: "";
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 40%;                /* largeur comme tu voulais */
-    aspect-ratio: 1 / 1;       /* garde les proportions de l'image */
-    transform: translate(-50%, -50%) rotate(-90deg); /* centrage + rotation */
+    width: 35%;
+    aspect-ratio: 1 / 1;
     background-image: url("images/IMG_1835-removebg-preview.png");
     background-size: contain;
     background-repeat: no-repeat;
-    z-index: -1;               /* derrière le texte */
+    transform: translate(-50%, -50%) rotate(-90deg);
+    opacity: 0.25;
+    z-index: -1;
 }
- 
 
-  h1 {
+/* ================== TITRES ================== */
+h1 {
     font-size: 60px;
     font-weight: 400;
-    margin-bottom: 10px;
+    margin: 0 0 10px 0;
     letter-spacing: 8px;
-  }
+}
 
-  .subtitle {
+.subtitle {
     font-size: 14px;
-    color: #111;
     text-transform: uppercase;
     letter-spacing: 4px;
     margin-bottom: 40px;
-  }
-
-  .desc {
-    font-size: 16px;
-    color: #111;
-    line-height: 1.6;
-    max-width: 600px;
-  }
-   
- }
-
-  a.button-link {
-    display: inline-block;
-    padding: 10px 20px;
-    background: #111;
-    color: white;
-    text-decoration: none;
-    border-radius: 20px;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-    
 }
 
-  }
+/* ================== TEXTE ================== */
+.desc {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 600px;
+}
 
-  a.button-link:hover {
-    opacity: 0.8;
-  }
+/* ================== BOUTON PRINCIPAL ================== */
+a.button-link {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 28px;
+    border: 2px solid #111;
+    border-radius: 30px;
+    text-decoration: none;
+    color: #111;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
 
-  @media (max-width: 600px) {
+a.button-link:hover {
+    background: #111;
+    color: white;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 600px) {
     h1 {
-      font-size: 32px;
-      letter-spacing: 4px;
+        font-size: 32px;
+        letter-spacing: 4px;
+    }
 
     .subtitle {
-      font-size: 12px;
-      letter-spacing: 2px;
+        font-size: 12px;
+        letter-spacing: 2px;
     }
+
     .desc {
-      font-size: 14px;
+        font-size: 14px;
     }
-  }
+
+    .main::before {
+        width: 60%;
+    }
+}
 </style>
 </head>
+
 <body>
 
-<!-- Onglet produit -->
+<!-- Bouton top left -->
 <div class="sidebar">
-  <a href="produit.html">Produit</a>
+    <a href="produit.html">Découvrir les produits</a>
 </div>
 
+<!-- Contenu principal -->
 <div class="main">
-  
+    <h1>SILENCE</h1>
+    <div class="subtitle">Grandir en silence</div>
 
-  <h1>SILENCE</h1>
-  <div class="subtitle">Grandir en silence</div>
+    <div class="desc">
+        Bienvenue sur SILENCE, une marque pour ceux qui aiment la simplicité et le calme.<br>
+        Nous sommes une marque indépendante française actuellement en cours de création.
+        Nous travaillons avec exigence pour vous proposer des produits sobres, durables et essentiels.
+    </div>
 
-  <div class="desc">
-    Bienvenue sur SILENCE, une marque pour ceux qui aiment la simplicité et le calme.<br>
-    Nous sommes une marque indépendante française actuellement en cours de création.
-    Mais nous travaillons dur pour vous proposer les meilleurs produis possibles.
-  </div>
-
-  <a href="produit.html" class="button-link">Découvrir les produits</a>
+    <a href="produit.html" class="button-link">Voir la collection</a>
 </div>
-  
+
 </body>
 </html>
