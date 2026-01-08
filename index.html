@@ -12,6 +12,7 @@ body {
     font-family: "Helvetica Neue", Arial, sans-serif;
     background: #36bfcf;
     color: #111;
+    overflow-x: hidden;
 }
 
 /* ================== BOUTON TOP LEFT ================== */
@@ -44,32 +45,25 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;          
+    min-height: 100vh;
     text-align: center;
     box-sizing: border-box;
     position: relative;
-
-    /* ======== PADDING-TOP = hauteur prévue de l'image titre ======== */
-    padding-top: 360px;  /* ← image plus grande, rapproche le sous-titre */
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 60px;
+    padding: 20px 20px 60px;
 }
 
-/* ================== IMAGE TITRE EN ARRIÈRE-PLAN ================== */
-.main::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 360px;             /* largeur augmentée pour titre plus grand */
-    height: 360px;            /* hauteur augmentée */
+/* ================== DIV IMAGE TITRE ================== */
+.title-container {
+    width: 360px;
+    aspect-ratio: 1/1; /* garde proportions */
     background-image: url("images/IMG_1835-removebg-preview.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    transform: translateX(-50%) rotate(-90deg); /* rotation -90° */
-    z-index: -1;
+    transform: rotate(-90deg);
+    margin-bottom: 20px; /* distance identique sous-titre → texte */
+    opacity: 0;
+    animation: fadeIn 1.2s forwards;
 }
 
 /* ================== SOUS-TITRE ================== */
@@ -77,9 +71,11 @@ body {
     font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 6px;
-    margin-bottom: 15px;   /* rapproche le texte du sous-titre */
-    position: relative;  
+    margin-bottom: 20px; /* distance identique titre → sous-titre et sous-titre → texte */
+    position: relative;
     z-index: 1;
+    opacity: 0;
+    animation: fadeIn 1.5s forwards 0.6s;
 }
 
 /* ================== TEXTE ================== */
@@ -92,29 +88,28 @@ body {
     z-index: 1;
 }
 
+/* ================== FADE-IN ================== */
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
 /* ================== RESPONSIVE ================== */
 @media (max-width: 600px) {
-    .main {
-        padding-top: 240px;  /* ajusté pour mobile */
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-bottom: 40px;
+    .title-container {
+        width: 240px;
+        margin-bottom: 15px;
     }
 
     .subtitle {
         font-size: 13px;
         letter-spacing: 3px;
-        margin-bottom: 12px;
+        margin-bottom: 15px;
+        animation-delay: 0.5s;
     }
 
     .desc {
         font-size: 15px;
         line-height: 1.9;
-    }
-
-    .main::before {
-        width: 240px;           /* réduit la taille sur mobile */
-        height: 240px;
     }
 }
 </style>
@@ -130,7 +125,10 @@ body {
 <!-- Contenu principal -->
 <div class="main">
 
-    <!-- Sous-titre juste sous l'image titre -->
+    <!-- Image titre -->
+    <div class="title-container"></div>
+
+    <!-- Sous-titre -->
     <div class="subtitle">Grandir en silence</div>
 
     <!-- Texte descriptif -->
@@ -144,4 +142,5 @@ body {
 
 </body>
 </html>
+
 
