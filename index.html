@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>SILENCE – Grandir en silence</title>
-
+  <meta charset="UTF-8">
+  <title>SILENCE – Accueil</title>
   <style>
     body {
       margin: 0;
@@ -11,17 +10,38 @@
       font-family: Arial, Helvetica, sans-serif;
       background: #ffffff;
       color: #111;
-      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* Bannière latérale */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 100%;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-size: 16px;
+      letter-spacing: 2px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar:hover {
+      background: #333;
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 900px;
       margin: auto;
-      padding: 60px 20px;
+      padding: 60px 20px 60px 100px; /* laisser la place pour la sidebar */
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
 
     h1 {
@@ -32,41 +52,21 @@
     }
 
     .subtitle {
-      font-size: 12px;
+      font-size: 14px;
       letter-spacing: 4px;
       color: #777;
-      margin-bottom: 60px;
+      margin-bottom: 40px;
       text-transform: uppercase;
     }
 
-    img {
-      max-width: 320px;
-      border-radius: 12px;
-      margin-bottom: 40px;
-    }
-
-    /* Image pivotée */
-    .rotated {
-      transform: rotate(90deg); 
-      max-width: 150px; /* taille adaptée pour logo pivoté */
-      margin-bottom: 40px;
-    }
-
     .desc {
-      font-size: 15px;
+      font-size: 16px;
       color: #555;
-      margin-bottom: 30px;
       line-height: 1.6;
+      margin-bottom: 40px;
     }
 
-    .price {
-      font-size: 20px;
-      font-weight: bold;
-      color: #111;
-      margin-bottom: 20px;
-    }
-
-    .button-link {
+    a.button-link {
       display: inline-block;
       padding: 14px 28px;
       border: none;
@@ -78,10 +78,9 @@
       letter-spacing: 1px;
       text-decoration: none;
       transition: all 0.3s ease;
-      margin-bottom: 60px;
     }
 
-    .button-link:hover {
+    a.button-link:hover {
       opacity: 0.8;
       transform: scale(1.05);
     }
@@ -99,45 +98,38 @@
         letter-spacing: 4px;
       }
       .subtitle {
-        font-size: 10px;
+        font-size: 12px;
         letter-spacing: 2px;
       }
-      img {
-        max-width: 90%;
+      .container {
+        padding-left: 60px;
       }
-      .rotated {
-        max-width: 80%; /* s’adapte au mobile */
-        transform: rotate(90deg);
+      .sidebar {
+        width: 50px;
+        font-size: 14px;
       }
     }
   </style>
 </head>
 
 <body>
+  <!-- Sidebar -->
+  <div class="sidebar" onclick="window.location.href='produit.html'">Produit</div>
 
   <div class="container">
     <h1>SILENCE</h1>
     <div class="subtitle">Grandir en silence</div>
 
-    <!-- Image principale du T-shirt -->
-    <img src="images/tshirt.png" alt="T-shirt Silence">
-
-    <!-- Image pivotée du logo -->
-    <img src="images/logo.png" alt="Logo Silence" class="rotated">
-
     <div class="desc">
-      Une pièce calme et minimaliste. Un message discret.<br>
-      Conçue pour ceux qui grandissent en silence.
+      Bienvenue sur SILENCE, une marque pour ceux qui aiment la simplicité et le calme. <br>
+      Ici, vous pouvez présenter votre marque, votre philosophie ou tout ce que vous souhaitez écrire.
     </div>
 
-    <div class="price">15 €</div>
-
-    <a href="https://ton-site-de-panier.com" target="_blank" class="button-link">Ajouter au panier</a>
+    <a href="produit.html" class="button-link">Découvrir le produit</a>
 
     <footer>
       © 2026 SILENCE — Tous droits réservés
     </footer>
   </div>
-
 </body>
 </html>
