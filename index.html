@@ -11,7 +11,7 @@
       font-family: Arial, Helvetica, sans-serif;
       background: #ffffff;
       color: #111;
-      overflow-y: auto; /* permet le scroll vertical */
+      overflow-y: auto;
     }
 
     .container {
@@ -19,6 +19,9 @@
       margin: auto;
       padding: 60px 20px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h1 {
@@ -42,6 +45,11 @@
       margin-bottom: 40px;
     }
 
+    /* Image pivotée */
+    .rotated {
+      transform: rotate(90deg); /* tourne l'image pour qu'elle soit lisible */
+    }
+
     .desc {
       font-size: 15px;
       color: #555;
@@ -50,11 +58,12 @@
     }
 
     .price {
-      font-size: 18px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #111;
       margin-bottom: 20px;
     }
 
-    /* Style pour le bouton/lien */
     .button-link {
       display: inline-block;
       padding: 14px 28px;
@@ -65,8 +74,9 @@
       border-radius: 30px;
       font-size: 14px;
       letter-spacing: 1px;
-      text-decoration: none; /* enlève le soulignement du lien */
+      text-decoration: none;
       transition: all 0.3s ease;
+      margin-bottom: 60px;
     }
 
     .button-link:hover {
@@ -75,9 +85,24 @@
     }
 
     footer {
-      margin-top: 100px;
       font-size: 12px;
       color: #aaa;
+      margin-top: 60px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 32px;
+        letter-spacing: 4px;
+      }
+      .subtitle {
+        font-size: 10px;
+        letter-spacing: 2px;
+      }
+      img {
+        max-width: 90%;
+      }
     }
   </style>
 </head>
@@ -88,7 +113,11 @@
     <h1>SILENCE</h1>
     <div class="subtitle">Grandir en silence</div>
 
-    <img src="https://via.placeholder.com/300x400?text=Votre+T-shirt" alt="T-shirt Silence">
+    <!-- Image principale du T-shirt -->
+    <img src="images/tshirt.png" alt="T-shirt Silence">
+
+    <!-- Nouvelle image pivotée -->
+    <img src="images/1c030cf3-937b-4b62-989a-f4684f4a66e5.png" alt="Logo Silence" class="rotated">
 
     <div class="desc">
       Une pièce calme et minimaliste. Un message discret.<br>
@@ -97,7 +126,6 @@
 
     <div class="price">15 €</div>
 
-    <!-- Lien qui ouvre une nouvelle fenêtre -->
     <a href="https://ton-site-de-panier.com" target="_blank" class="button-link">Ajouter au panier</a>
 
     <footer>
