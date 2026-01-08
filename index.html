@@ -44,11 +44,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;          
+    min-height: 100vh;
     text-align: center;
-    padding: 40px 20px 60px;
     box-sizing: border-box;
     position: relative;
+
+    /* ======== PADDING-TOP = hauteur prévue de l'image titre ======== */
+    padding-top: 280px;  /* ← hauteur image-titre estimée */
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 60px;
 }
 
 /* ================== IMAGE TITRE EN ARRIÈRE-PLAN ================== */
@@ -57,14 +62,14 @@ body {
     position: absolute;
     top: 0;
     left: 50%;
-    width: 400px;             /* largeur de l'image titre */
-    aspect-ratio: 1 / 1;
+    width: 260px;             /* largeur de l'image-titre */
+    height: 260px;            /* hauteur de l'image-titre */
     background-image: url("images/IMG_1835-removebg-preview.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     transform: translateX(-50%) rotate(-90deg); /* rotation -90° */
-    z-index: -1;               /* derrière le texte */
+    z-index: -1;
 }
 
 /* ================== SOUS-TITRE ================== */
@@ -73,8 +78,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 6px;
     margin-bottom: 20px;
-    position: absolute;  /* pour être au-dessus de ::before */
-    top:20px
+    position: relative;  /* pour être au-dessus de l'image */
     z-index: 1;
 }
 
@@ -91,7 +95,10 @@ body {
 /* ================== RESPONSIVE ================== */
 @media (max-width: 600px) {
     .main {
-        padding: 20px 20px 40px;
+        padding-top: 200px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 40px;
     }
 
     .subtitle {
@@ -106,7 +113,8 @@ body {
     }
 
     .main::before {
-        width: 180px;           /* réduit la taille sur mobile */
+        width: 180px;
+        height: 180px;
     }
 }
 </style>
@@ -122,8 +130,10 @@ body {
 <!-- Contenu principal -->
 <div class="main">
 
+    <!-- Sous-titre juste sous l'image titre -->
     <div class="subtitle">Grandir en silence</div>
 
+    <!-- Texte descriptif -->
     <div class="desc">
         Bienvenue sur SILENCE, une marque pensée pour ceux qui recherchent la simplicité, le calme et l’essentiel.<br><br>
         Nous sommes une marque indépendante française actuellement en cours de création, guidée par l’envie de proposer des pièces sobres, durables et intemporelles.<br><br>
@@ -134,5 +144,3 @@ body {
 
 </body>
 </html>
-
-
