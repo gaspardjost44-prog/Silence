@@ -44,25 +44,25 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;          /* ← IMPORTANT : min-height, pas height */
     text-align: center;
-    padding: 80px 20px 20px;
+    padding: 80px 20px 60px;    /* espace bas pour respirer */
     box-sizing: border-box;
     position: relative;
-    overflow: hidden;
 }
 
 /* ================== IMAGE DÉCORATIVE ARRIÈRE ================== */
 .main::before {
     content: "";
     position: absolute;
-    top: 55%;
+    top: 60%;
     left: 50%;
     width: 35%;
     aspect-ratio: 1 / 1;
     background-image: url("images/IMG_1835-removebg-preview.png");
     background-size: contain;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat;   /* ← EMPÊCHE LA DUPLICATION */
+    background-position: center;
     transform: translate(-50%, -50%) rotate(-90deg);
     opacity: 0.15;
     z-index: -1;
@@ -70,9 +70,9 @@ body {
 
 /* ================== IMAGE TITRE ================== */
 .title-image {
-    width: 260px;              /* ajuste ici si tu veux plus grand */
+    width: 260px;
     height: auto;
-    margin-bottom: 30px;       /* espace entre image et sous-titre */
+    margin-bottom: 30px;
 }
 
 /* ================== SOUS-TITRE ================== */
@@ -141,4 +141,3 @@ body {
 
 </body>
 </html>
-
