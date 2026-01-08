@@ -10,8 +10,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Arial, sans-serif;
-    background: #111;      /* noir */
-    color: #f5f5f5;        /* blanc */
+    background: #111;      
+    color: #f5f5f5;        
     overflow-x: hidden;
 }
 
@@ -26,7 +26,7 @@ body {
 .sidebar a {
     display: inline-block;
     padding: 10px 22px;
-    border: 2px solid #f5f5f5;  /* blanc */
+    border: 2px solid #f5f5f5;  
     border-radius: 20px;
     text-decoration: none;
     color: #f5f5f5;
@@ -55,22 +55,14 @@ body {
 /* ================== IMAGE TITRE ================== */
 .title-container {
     width: 360px;
-    aspect-ratio: 1/1;
-    position: relative;
-    margin-bottom: 20px;
-}
-
-/* Rotation appliquée uniquement au pseudo-élément */
-.title-container::before {
-    content: "";
-    position: absolute;
-    inset: 0;
+    aspect-ratio: 1/1; /* garde les proportions */
     background-image: url("images/IMG_1835-removebg-preview.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    transform: rotate(-90deg);
+    margin-bottom: 20px;
     opacity: 0;
+    transform: translateY(-40px); /* départ légèrement au-dessus */
     animation: slideFadeIn 1.2s forwards;
 }
 
@@ -79,7 +71,7 @@ body {
     font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 6px;
-    margin-bottom: 20px;
+    margin-bottom: 20px; 
     position: relative;
     z-index: 1;
     color: #ccc;
@@ -103,7 +95,7 @@ body {
 @keyframes slideFadeIn {
     to {
         opacity: 1;
-        transform: translateY(0) rotate(0deg);
+        transform: translateY(0);
     }
 }
 
@@ -139,7 +131,7 @@ body {
 <!-- Contenu principal -->
 <div class="main">
 
-    <!-- Image titre -->
+    <!-- Image titre (horizontale) -->
     <div class="title-container"></div>
 
     <!-- Sous-titre -->
@@ -156,3 +148,4 @@ body {
 
 </body>
 </html>
+
