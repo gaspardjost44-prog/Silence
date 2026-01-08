@@ -37,13 +37,18 @@
   .main {
     display: flex;
     flex-direction: column;
-    top: 50px
-    justify-content: flex start;/* au lieu de center */
+    justify-content: flex-start;/* au lieu de center */
     align-items: center;
     height: 100vh; /* plein écran */
     text-align: center;
     padding: 10px 20px; /* réduit l'écart entre bordure du haut et texte*/
     box-sizing: border-box;
+
+     /* Image de fond */
+    background-image: url("images/IMG_1835-removebg-preview.png"); /* chemin vers ton image */
+    background-size: cover;        /* couvre tout le conteneur */
+    background-position: center;   /* centrée */
+    background-repeat: no-repeat;  /* pas de répétition */
 
 
   }
@@ -118,9 +123,6 @@
 
 <div class="main">
   
-  <img src="images/IMG_1835-removebg-preview.png" 
-     alt="Photo SILENCE" 
-     class="main-image">
 
   <h1>SILENCE</h1>
   <div class="subtitle">Grandir en silence</div>
@@ -133,8 +135,6 @@
 
   <a href="produit.html" class="button-link">Découvrir les produits</a>
 </div>
-<img src="images/IMG_1835-removebg-preview.png" alt="IMG_1835-removebg-preview.png SILENCE" class="main-image">
-
   
 </body>
 </html>
