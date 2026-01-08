@@ -47,7 +47,9 @@
 
     /* Image pivotée */
     .rotated {
-      transform: rotate(90deg); /* tourne l'image pour qu'elle soit lisible */
+      transform: rotate(90deg); 
+      max-width: 150px; /* taille adaptée pour logo pivoté */
+      margin-bottom: 40px;
     }
 
     .desc {
@@ -103,6 +105,10 @@
       img {
         max-width: 90%;
       }
+      .rotated {
+        max-width: 80%; /* s’adapte au mobile */
+        transform: rotate(90deg);
+      }
     }
   </style>
 </head>
@@ -116,8 +122,8 @@
     <!-- Image principale du T-shirt -->
     <img src="images/tshirt.png" alt="T-shirt Silence">
 
-    <!-- Nouvelle image pivotée -->
-    <img src="images/1c030cf3-937b-4b62-989a-f4684f4a66e5.png" alt="Logo Silence" class="rotated">
+    <!-- Image pivotée du logo -->
+    <img src="images/logo.png" alt="Logo Silence" class="rotated">
 
     <div class="desc">
       Une pièce calme et minimaliste. Un message discret.<br>
