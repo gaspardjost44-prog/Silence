@@ -57,14 +57,13 @@ body {
     position: absolute;
     top: 0;
     left: 50%;
-    width: 260px;             /* largeur de l'image titre */
+    width: 400px;             /* largeur de l'image titre */
     aspect-ratio: 1 / 1;
     background-image: url("images/IMG_1835-removebg-preview.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     transform: translateX(-50%) rotate(-90deg); /* rotation -90° */
-    opacity: 0.15;            /* image très subtile */
     z-index: -1;               /* derrière le texte */
 }
 
@@ -74,7 +73,8 @@ body {
     text-transform: uppercase;
     letter-spacing: 6px;
     margin-bottom: 20px;
-    position: relative;       /* pour être au-dessus de ::before */
+    position: absolute;  /* pour être au-dessus de ::before */
+    top:20px
     z-index: 1;
 }
 
