@@ -44,12 +44,12 @@
     padding: 10px 20px; /* réduit l'écart entre bordure du haut et texte*/
     box-sizing: border-box;
 
-     /* Image de fond */
-    background-image: url("images/IMG_1835-removebg-preview.png"); /* chemin vers ton image */
-    background-size: cover;        /* couvre tout le conteneur */
-    background-position: center;   /* centrée */
-    background-repeat: no-repeat;  /* pas de répétition */
-
+  /* Image de fond */
+    background-image: url("images/IMG_1835-removebg-preview.png");
+    background-size: contain;        /* l'image garde sa taille réelle et ratio */
+    background-position: center;     /* centré horizontalement et verticalement */
+    background-repeat: no-repeat;    /* pas de répétition */
+    transform: rotate(-90deg);       /* si tu veux la faire pivoter */
 
   }
 
@@ -74,13 +74,6 @@
     line-height: 1.6;
     max-width: 600px;
   }
- .main-image {
-  max-width: 600px;
-  width: 25%;
-  height: auto;
-  border-radius: 12px;
-  margin-bottom: 10px;
-  transform: rotate(-90deg);
    
  }
 
