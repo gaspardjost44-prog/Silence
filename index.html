@@ -1,45 +1,66 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>SILENCE – Accueil</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #ffffff;
-      color: #111;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8">
+<title>SILENCE – Accueil</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #111;
+    text-align: center;
+  }
 
-    /* Bordure / Sidebar */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 3cm; /* bordure épaisse */
-      height: 100%;
-      background: #111;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start; /* menu en haut */
-      align-items: center;
-      padding-top: 20px;
-      box-sizing: border-box;
-      color: white;
-      font-size: 16px;
-      letter-spacing: 2px;
-    }
+  .sidebar {
+    width: 100px;
+    height: 100%;
+    background: #111;
+    color: white;
+    padding: 20px;
+    display: inline-block;
+    vertical-align: top;
+  }
 
-    .sidebar a {
-      color: white;
-      text-decoration: none;
-      margin-bottom: 20px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
+  .sidebar a {
+    color: white;
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+  }
 
-    .sidebar a:hover {
-      opacity: 0.8;
-      transform: sca
+  .main {
+    display: inline-block;
+    padding: 20px;
+    vertical-align: top;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  .button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #111;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    margin-top: 20px;
+  }
+
+  .button-link:hover {
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <a href="produit.html">Produit</a>
+</div>
+
+<div class="main">
+  <h1>SILENCE</h1>
+  <p>Bienvenue su
