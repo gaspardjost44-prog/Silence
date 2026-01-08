@@ -116,21 +116,11 @@ body {
 /* ================== POINTS FLOTTANTS ================== */
 .decorative-dot {
     position: absolute;
-    width: 6px;
-    height: 6px;
     background-color: #888;
     border-radius: 50%;
-    opacity: 0.5;
-    animation: float 4s infinite alternate;
     z-index: 0;
+    animation: float infinite alternate;
 }
-
-/* Création de plusieurs points avec position aléatoire */
-.dot1 { top: 30%; left: 10%; animation-delay: 0s; }
-.dot2 { top: 50%; left: 25%; animation-delay: 1s; }
-.dot3 { top: 70%; left: 15%; animation-delay: 2s; }
-.dot4 { top: 20%; left: 70%; animation-delay: 0.5s; }
-.dot5 { top: 60%; left: 80%; animation-delay: 1.5s; }
 
 @keyframes float {
     0% { transform: translateY(0); }
@@ -178,34 +168,44 @@ body {
 <!-- Contenu principal -->
 <div class="main">
 
-    <!-- Points décoratifs flottants -->
-    <div class="decorative-dot dot1"></div>
-    <div class="decorative-dot dot2"></div>
-    <div class="decorative-dot dot3"></div>
-    <div class="decorative-dot dot4"></div>
-    <div class="decorative-dot dot5"></div>
-
-    <!-- Image titre -->
+    <!-- IMAGE TITRE -->
     <div class="title-container">
         <img src="images/IMG_1835-removebg-preview.png" alt="Titre SILENCE">
     </div>
 
-    <!-- Sous-titre -->
+    <!-- SOUS-TITRE -->
     <div class="subtitle">Grandir en silence</div>
 
-    <!-- Ligne décorative -->
+    <!-- LIGNE DÉCORATIVE -->
     <hr class="divider">
 
-    <!-- Texte descriptif -->
+    <!-- TEXTE -->
     <div class="desc">
         Bienvenue sur SILENCE, une marque pensée pour ceux qui recherchent la simplicité, le calme et l’essentiel.<br><br>
         Nous sommes une marque indépendante française actuellement en cours de création, guidée par l’envie de proposer des pièces sobres, durables et intemporelles.<br><br>
         Chaque détail est réfléchi pour laisser place à l’essentiel : le confort, la qualité et le silence.
     </div>
 
+    <!-- 30 PARTICULES FLOTANTES ALÉATOIRES -->
+    <script>
+    const main = document.querySelector('.main');
+    for(let i=0;i<30;i++){
+        const dot = document.createElement('div');
+        dot.classList.add('decorative-dot');
+        const size = Math.random() * 8 + 2; // taille entre 2px et 10px
+        dot.style.width = size + 'px';
+        dot.style.height = size + 'px';
+        dot.style.top = Math.random()*90 + '%';
+        dot.style.left = Math.random()*90 + '%';
+        dot.style.opacity = Math.random()*0.6 + 0.2;
+        dot.style.animationDuration = (Math.random()*3 + 2) + 's'; // vitesse 2s à 5s
+        main.appendChild(dot);
+    }
+    </script>
+
 </div>
 
-<!-- ================== PARALLAX LÉGER JS ================== -->
+<!-- PARALLAX TITRE -->
 <script>
 window.addEventListener('scroll', () => {
     const title = document.querySelector('.title-container');
