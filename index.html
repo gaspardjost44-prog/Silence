@@ -44,36 +44,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;          /* ← IMPORTANT : min-height, pas height */
+    min-height: 100vh;          /* scroll possible si contenu long */
     text-align: center;
-    padding: 10px 15px 20px;    /* espace bas pour respirer */
+    padding: 30px 20px 60px;    /* moins d’espace en haut pour rapprocher le titre */
     box-sizing: border-box;
     position: relative;
 }
 
-/* ================== IMAGE DÉCORATIVE ARRIÈRE ================== */
-.main::before {
-    content: "";
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    width: 35%;
-    aspect-ratio: 1 / 1;
-    background-image: url("images/IMG_1835-removebg-preview.png");
-    background-size: contain;
-    background-repeat: no-repeat;   /* ← EMPÊCHE LA DUPLICATION */
-    background-position: center;
-    transform: translate(-50%, -50%) rotate(-90deg);
-    opacity: 0.15;
-    z-index: -1;
-}
-
 /* ================== IMAGE TITRE ================== */
 .title-image {
-    width: 260px;
+    width: 260px;        /* ajuste la taille du titre */
     height: auto;
-    margin-bottom: 10px;
-    transform: rotate(-90deg);      /* ← ROTATION */
+    margin-bottom: 10px; /* réduit l’espace avec le sous-titre */
+    transform: rotate(-90deg);
     display: block;
 }
 
@@ -82,13 +65,13 @@ body {
     font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 6px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;  /* espace réduit avant le texte */
 }
 
 /* ================== TEXTE ================== */
 .desc {
     font-size: 17px;
-    line-height: 2.1;
+    line-height: 2.1;       /* bonne aération du texte */
     max-width: 620px;
     letter-spacing: 0.3px;
 }
@@ -97,22 +80,18 @@ body {
 @media (max-width: 600px) {
     .title-image {
         width: 200px;
-        margin-bottom: 20px;
+        margin-bottom: 8px;
     }
 
     .subtitle {
         font-size: 13px;
         letter-spacing: 3px;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
     }
 
     .desc {
         font-size: 15px;
         line-height: 1.9;
-    }
-
-    .main::before {
-        width: 60%;
     }
 }
 </style>
