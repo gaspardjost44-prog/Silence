@@ -43,7 +43,6 @@ body {
 .main {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
     height: 100vh;
     text-align: center;
@@ -53,36 +52,32 @@ body {
     overflow: hidden;
 }
 
-/* ================== IMAGE ARRIÈRE-PLAN ================== */
+/* ================== IMAGE DÉCORATIVE ARRIÈRE ================== */
 .main::before {
     content: "";
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
-    width: 50%;
+    width: 35%;
     aspect-ratio: 1 / 1;
     background-image: url("images/IMG_1835-removebg-preview.png");
     background-size: contain;
     background-repeat: no-repeat;
     transform: translate(-50%, -50%) rotate(-90deg);
+    opacity: 0.15;
     z-index: -1;
 }
 
-/* ================== TITRE ================== */
-h1 {
-    font-size: 64px;
-    font-weight: 300;
-    margin: 0 0 25px 0;
-    letter-spacing: 10px;
-    background: #0b2f3a;          /* BLEU FONCÉ DERRIÈRE LE TITRE */
-    color: white;
-    padding: 18px 40px;
-    border-radius: 20px;           /* très léger arrondi, luxe */
+/* ================== IMAGE TITRE ================== */
+.title-image {
+    width: 260px;              /* ajuste ici si tu veux plus grand */
+    height: auto;
+    margin-bottom: 30px;       /* espace entre image et sous-titre */
 }
 
 /* ================== SOUS-TITRE ================== */
 .subtitle {
-    font-size: 16px;              /* AGRANDI */
+    font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 6px;
     margin-bottom: 60px;
@@ -98,10 +93,9 @@ h1 {
 
 /* ================== RESPONSIVE ================== */
 @media (max-width: 600px) {
-    h1 {
-        font-size: 36px;
-        letter-spacing: 5px;
-        padding: 14px 26px;
+    .title-image {
+        width: 200px;
+        margin-bottom: 20px;
     }
 
     .subtitle {
@@ -131,7 +125,10 @@ h1 {
 
 <!-- Contenu principal -->
 <div class="main">
-    <h1>SILENCE</h1>
+
+    <!-- IMAGE = TITRE -->
+    <img src="images/IMG_1835-removebg-preview.png" alt="SILENCE" class="title-image">
+
     <div class="subtitle">Grandir en silence</div>
 
     <div class="desc">
@@ -139,6 +136,7 @@ h1 {
         Nous sommes une marque indépendante française actuellement en cours de création, guidée par l’envie de proposer des pièces sobres, durables et intemporelles.<br><br>
         Chaque détail est réfléchi pour laisser place à l’essentiel : le confort, la qualité et le silence.
     </div>
+
 </div>
 
 </body>
