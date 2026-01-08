@@ -44,13 +44,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    min-height: 100vh;          
     text-align: center;
     box-sizing: border-box;
     position: relative;
 
     /* ======== PADDING-TOP = hauteur prévue de l'image titre ======== */
-    padding-top: 280px;  /* ← hauteur image-titre estimée */
+    padding-top: 360px;  /* ← image plus grande, rapproche le sous-titre */
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 60px;
@@ -62,8 +62,8 @@ body {
     position: absolute;
     top: 0;
     left: 50%;
-    width: 260px;             /* largeur de l'image-titre */
-    height: 260px;            /* hauteur de l'image-titre */
+    width: 360px;             /* largeur augmentée pour titre plus grand */
+    height: 360px;            /* hauteur augmentée */
     background-image: url("images/IMG_1835-removebg-preview.png");
     background-size: contain;
     background-repeat: no-repeat;
@@ -77,8 +77,8 @@ body {
     font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 6px;
-    margin-bottom: 20px;
-    position: relative;  /* pour être au-dessus de l'image */
+    margin-bottom: 15px;   /* rapproche le texte du sous-titre */
+    position: relative;  
     z-index: 1;
 }
 
@@ -95,7 +95,7 @@ body {
 /* ================== RESPONSIVE ================== */
 @media (max-width: 600px) {
     .main {
-        padding-top: 200px;
+        padding-top: 240px;  /* ajusté pour mobile */
         padding-left: 20px;
         padding-right: 20px;
         padding-bottom: 40px;
@@ -104,7 +104,7 @@ body {
     .subtitle {
         font-size: 13px;
         letter-spacing: 3px;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
     }
 
     .desc {
@@ -113,8 +113,8 @@ body {
     }
 
     .main::before {
-        width: 180px;
-        height: 180px;
+        width: 240px;           /* réduit la taille sur mobile */
+        height: 240px;
     }
 }
 </style>
@@ -144,3 +144,4 @@ body {
 
 </body>
 </html>
+
