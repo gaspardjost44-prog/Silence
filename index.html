@@ -13,34 +13,42 @@
       overflow-x: hidden;
     }
 
-    /* Bannière latérale */
+    /* Bordure / Sidebar */
     .sidebar {
       position: fixed;
       top: 0;
       left: 0;
-      width: 60px;
+      width: 3cm; /* bordure épaisse */
       height: 100%;
       background: #111;
       display: flex;
+      flex-direction: column;
+      justify-content: flex-start; /* menu en haut */
       align-items: center;
-      justify-content: center;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
+      padding-top: 20px;
+      box-sizing: border-box;
+      color: white;
       font-size: 16px;
       letter-spacing: 2px;
+    }
+
+    .sidebar a {
       color: white;
-      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 20px;
+      font-weight: bold;
       transition: all 0.3s ease;
     }
 
-    .sidebar:hover {
-      background: #333;
+    .sidebar a:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
     }
 
     .container {
       max-width: 900px;
-      margin: auto;
-      padding: 60px 20px 60px 100px; /* laisser la place pour la sidebar */
+      margin-left: 3cm; /* laisser place à la bordure */
+      padding: 60px 20px;
       text-align: center;
     }
 
@@ -91,45 +99,6 @@
       margin-top: 60px;
     }
 
-    /* Responsive */
     @media (max-width: 600px) {
-      h1 {
-        font-size: 32px;
-        letter-spacing: 4px;
-      }
-      .subtitle {
-        font-size: 12px;
-        letter-spacing: 2px;
-      }
       .container {
-        padding-left: 60px;
-      }
-      .sidebar {
-        width: 50px;
-        font-size: 14px;
-      }
-    }
-  </style>
-</head>
 
-<body>
-  <!-- Sidebar -->
-  <div class="sidebar" onclick="window.location.href='produit.html'">Produit</div>
-
-  <div class="container">
-    <h1>SILENCE</h1>
-    <div class="subtitle">Grandir en silence</div>
-
-    <div class="desc">
-      Bienvenue sur SILENCE, une marque pour ceux qui aiment la simplicité et le calme. <br>
-      Ici, vous pouvez présenter votre marque, votre philosophie ou tout ce que vous souhaitez écrire.
-    </div>
-
-    <a href="produit.html" class="button-link">Découvrir le produit</a>
-
-    <footer>
-      © 2026 SILENCE — Tous droits réservés
-    </footer>
-  </div>
-</body>
-</html>
