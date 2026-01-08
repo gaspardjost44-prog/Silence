@@ -10,37 +10,64 @@
     font-family: Arial, sans-serif;
     background: #fff;
     color: #111;
-    text-align: center;
   }
 
+  /* Onglet Produit en haut à gauche */
   .sidebar {
-    width: 100px;
-    height: 100%;
+    position: fixed;
+    top: 20px;
+    left: 20px;
     background: #111;
-    color: white;
-    padding: 20px;
-    display: inline-block;
-    vertical-align: top;
+    padding: 10px 20px;
+    border-radius: 5px;
   }
 
   .sidebar a {
     color: white;
-    display: block;
-    margin-bottom: 10px;
     text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
   }
 
+  .sidebar a:hover {
+    opacity: 0.8;
+  }
+
+  /* Contenu centré */
   .main {
-    display: inline-block;
-    padding: 20px;
-    vertical-align: top;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* plein écran */
+    text-align: center;
+    padding: 0 20px;
+    box-sizing: border-box;
   }
 
   h1 {
     font-size: 48px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    letter-spacing: 8px;
   }
 
-  .button-link {
+  .subtitle {
+    font-size: 14px;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 40px;
+  }
+
+  .desc {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  a.button-link {
     display: inline-block;
     padding: 10px 20px;
     background: #111;
@@ -48,19 +75,46 @@
     text-decoration: none;
     border-radius: 20px;
     margin-top: 20px;
+    transition: all 0.3s ease;
   }
 
-  .button-link:hover {
+  a.button-link:hover {
     opacity: 0.8;
+  }
+
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 32px;
+      letter-spacing: 4px;
+    }
+    .subtitle {
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+    .desc {
+      font-size: 14px;
+    }
   }
 </style>
 </head>
 <body>
 
+<!-- Onglet produit -->
 <div class="sidebar">
   <a href="produit.html">Produit</a>
 </div>
 
 <div class="main">
   <h1>SILENCE</h1>
-  <p>Bienvenue su
+  <div class="subtitle">Grandir en silence</div>
+
+  <div class="desc">
+    Bienvenue sur SILENCE, une marque pour ceux qui aiment la simplicité et le calme.<br>
+    Ici, vous pouvez présenter votre marque, votre philosophie ou tout ce que vous souhaitez écrire. 
+  </div>
+
+  <a href="produit.html" class="button-link">Découvrir le produit</a>
+</div>
+
+</body>
+</html>
