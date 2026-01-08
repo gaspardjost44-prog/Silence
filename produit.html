@@ -4,28 +4,55 @@
 <meta charset="UTF-8">
 <title>SILENCE – Produit</title>
 <style>
-  body {
+/* ================== BASE ================== */
+body {
     margin: 0;
     padding: 20px;
-    font-family: Arial, sans-serif;
+    font-family: "Helvetica Neue", Arial, sans-serif;
     text-align: center;
-    background: #36bfcf;
-  }
+    background: #111;
+    color: #f5f5f5;
+    overflow-x: hidden;
+    position: relative;
+}
 
-  .back-arrow {
+/* ================== FLECHE RETOUR ================== */
+.back-arrow {
     display: block;
     text-align: left;
     font-size: 24px;
     margin-bottom: 20px;
     text-decoration: none;
-    color: #111;
-  }
+    color: #f5f5f5;
+    transition: color 0.3s ease;
+}
 
-  .back-arrow:hover {
-    color: #555;
-  }
+.back-arrow:hover {
+    color: #ccc;
+}
 
-  .button-link {
+/* ================== TITRE ================== */
+h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: slideFadeIn 1s forwards;
+}
+
+/* ================== TEXTE ================== */
+p {
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: slideFadeIn 1s forwards 0.5s;
+}
+
+/* ================== BOUTON ================== */
+.button-link {
     display: inline-block;
     padding: 10px 20px;
     background: #111;
@@ -33,22 +60,87 @@
     text-decoration: none;
     border-radius: 20px;
     margin-top: 20px;
-  }
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: slideFadeIn 1s forwards 0.8s;
+}
 
-  .button-link:hover {
-    opacity: 0.8;
-  }
+.button-link:hover {
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(255,255,255,0.4);
+    transform: translateY(-2px);
+}
+
+/* ================== PARTICULES FLOTTANTES ================== */
+.decorative-dot {
+    position: absolute;
+    background-color: #888;
+    border-radius: 50%;
+    z-index: 0;
+    animation: float infinite alternate;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+
+/* ================== ANIMATION FADE + SLIDE ================== */
+@keyframes slideFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 600px) {
+    h1 { font-size: 28px; }
+    p { font-size: 16px; }
+}
 </style>
 </head>
 <body>
 
+<!-- PARTICULES FLOTANTES GENERÉES EN JS -->
+<script>
+const body = document.body;
+for(let i=0; i<20; i++){
+    const dot = document.createElement('div');
+    dot.classList.add('decorative-dot');
+    const size = Math.random() * 8 + 2; // 2px à 10px
+    dot.style.width = size + 'px';
+    dot.style.height = size + 'px';
+    dot.style.top = Math.random()*90 + '%';
+    dot.style.left = Math.random()*90 + '%';
+    dot.style.opacity = Math.random()*0.6 + 0.2;
+    dot.style.animationDuration = (Math.random()*3 + 2) + 's';
+    body.appendChild(dot);
+}
+</script>
+
+<!-- RETOUR -->
 <a href="index.html" class="back-arrow">&#8592; Retour</a>
 
+<!-- TITRE -->
 <h1>Produit en vedette</h1>
-<p>Une pièce calme et minimaliste. Un message discret.<br>
+
+<!-- DESCRIPTION -->
+<p>Une pièce calme et minimaliste. Un message discret.</p>
 <p><strong>Prix : 15 €</strong></p>
 
+<!-- BOUTON -->
 <a href="https://ton-site-de-panier.com" class="button-link">Ajouter au panier</a>
+
+<!-- PARALLAX LEGERE DU TITRE -->
+<script>
+window.addEventListener('scroll', () => {
+    const title = document.querySelector('h1');
+    title.style.transform = `translateY(${window.scrollY * 0.05 - 20}px)`; // légère translation
+});
+</script>
 
 </body>
 </html>
+
