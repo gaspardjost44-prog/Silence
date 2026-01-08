@@ -44,18 +44,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;          /* scroll possible si contenu long */
+    min-height: 100vh;          
     text-align: center;
-    padding: 30px 20px 60px;    /* moins d’espace en haut pour rapprocher le titre */
+    padding: 20px 20px 40px;    /* rapproche le titre du haut */
     box-sizing: border-box;
     position: relative;
 }
 
 /* ================== IMAGE TITRE ================== */
 .title-image {
-    width: 260px;        /* ajuste la taille du titre */
+    width: 260px;
     height: auto;
-    margin-bottom: 10px; /* réduit l’espace avec le sous-titre */
+    margin-bottom: 4px;         /* PRESQUE COLLÉ AU SOUS-TITRE */
     transform: rotate(-90deg);
     display: block;
 }
@@ -65,13 +65,13 @@ body {
     font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 6px;
-    margin-bottom: 25px;  /* espace réduit avant le texte */
+    margin-bottom: 20px;        /* rapproche le texte du sous-titre */
 }
 
 /* ================== TEXTE ================== */
 .desc {
     font-size: 17px;
-    line-height: 2.1;       /* bonne aération du texte */
+    line-height: 2.1;
     max-width: 620px;
     letter-spacing: 0.3px;
 }
@@ -80,13 +80,13 @@ body {
 @media (max-width: 600px) {
     .title-image {
         width: 200px;
-        margin-bottom: 8px;
+        margin-bottom: 2px;
     }
 
     .subtitle {
         font-size: 13px;
         letter-spacing: 3px;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
 
     .desc {
@@ -122,3 +122,4 @@ body {
 
 </body>
 </html>
+
