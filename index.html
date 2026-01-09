@@ -2,118 +2,116 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>SILENCE – Accueil</title>
-
+<title>SILENCE – Produit</title>
 <style>
 /* ================== BASE ================== */
 body {
     margin: 0;
-    padding: 0;
+    padding: 20px;
     font-family: "Helvetica Neue", Arial, sans-serif;
+    text-align: center;
     background: #111;
     color: #f5f5f5;
     overflow-x: hidden;
     position: relative;
 }
 
-/* ================== BOUTON TOP LEFT ================== */
-.sidebar {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 10;
-}
-
-.sidebar a {
-    display: inline-block;
-    padding: 10px 22px;
-    border: 2px solid #f5f5f5;  
-    border-radius: 20px;
+/* ================== FLECHE RETOUR ================== */
+.back-arrow {
+    display: block;
+    text-align: left;
+    font-size: 24px;
+    margin-bottom: 20px;
     text-decoration: none;
     color: #f5f5f5;
-    font-size: 13px;
-    letter-spacing: 2px;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
 }
 
-.sidebar a:hover {
-    background: #f5f5f5;
-    color: #111;
+.back-arrow:hover {
+    color: #ccc;
+}
+
+/* ================== TITRE ================== */
+h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: slideFadeIn 1s forwards;
+}
+
+/* ================== TEXTE ================== */
+p {
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: slideFadeIn 1s forwards 0.5s;
+}
+
+/* ================== DROPDOWN ================== */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: slideFadeIn 1s forwards 0.8s;
+}
+
+.dropdown-button {
+    padding: 10px 25px;
+    background: #111;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 rgba(255,255,255,0);
+}
+
+.dropdown-button:hover {
     box-shadow: 0 0 8px rgba(255,255,255,0.4);
     transform: translateY(-2px);
 }
 
-/* ================== CONTENU PRINCIPAL ================== */
-.main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    text-align: center;
-    box-sizing: border-box;
-    position: relative;
-    padding: 20px 20px 60px;
-    overflow: hidden;
-}
-
-/* ================== IMAGE TITRE ================== */
-.title-container {
-    position: relative;
-    width: 360px;
-    height: 360px;
-    margin-bottom: 20px;
+.dropdown-menu {
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111;
+    border-radius: 15px;
+    padding: 10px 0;
+    min-width: 160px;
     opacity: 0;
-    transition: transform 0.3s ease-out;
-    animation: slideFadeIn 1.2s forwards;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 10;
 }
 
-.title-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transform: rotate(-90deg);
+.dropdown-menu a {
     display: block;
-    box-shadow: 0 8px 20px rgba(255,255,255,0.1);
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s ease;
 }
 
-/* ================== SOUS-TITRE ================== */
-.subtitle {
-    font-size: 16px;
-    text-transform: uppercase;
-    letter-spacing: 6px;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 2;
-    color: #ccc;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: slideFadeIn 1s forwards 0.6s;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+.dropdown-menu a:hover {
+    background: rgba(255,255,255,0.05);
 }
 
-/* ================== LIGNE DÉCORATIVE ================== */
-.divider {
-    width: 60px;
-    height: 2px;
-    background-color: #ccc;
-    border: none;
-    margin: 10px auto 20px;
-    position: relative;
-    z-index: 2;
+/* ouvert */
+.dropdown.active .dropdown-menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(5px);
 }
 
-/* ================== TEXTE ================== */
-.desc {
-    font-size: 17px;
-    line-height: 2.1;
-    max-width: 620px;
-    letter-spacing: 0.3px;
-    position: relative;
-    z-index: 2;
-    color: #f5f5f5;
-}
-
-/* ================== POINTS FLOTTANTS ================== */
+/* ================== PARTICULES ================== */
 .decorative-dot {
     position: absolute;
     background-color: #888;
@@ -127,7 +125,7 @@ body {
     100% { transform: translateY(-20px); }
 }
 
-/* ================== ANIMATION FADE + SLIDE ================== */
+/* ================== ANIMATION ================== */
 @keyframes slideFadeIn {
     to {
         opacity: 1;
@@ -137,79 +135,71 @@ body {
 
 /* ================== RESPONSIVE ================== */
 @media (max-width: 600px) {
-    .title-container {
-        width: 240px;
-        height: 240px;
-        margin-bottom: 15px;
-    }
-
-    .subtitle {
-        font-size: 13px;
-        letter-spacing: 3px;
-        margin-bottom: 15px;
-        animation-delay: 0.5s;
-    }
-
-    .desc {
-        font-size: 15px;
-        line-height: 1.9;
-    }
+    h1 { font-size: 28px; }
+    p { font-size: 16px; }
 }
 </style>
 </head>
-
 <body>
 
-<!-- Bouton top left -->
-<div class="sidebar">
-    <a href="produit.html">Découvrir les produits</a>
-</div>
+<!-- PARTICULES -->
+<script>
+const body = document.body;
+for(let i=0; i<20; i++){
+    const dot = document.createElement('div');
+    dot.classList.add('decorative-dot');
+    const size = Math.random() * 8 + 2;
+    dot.style.width = size + 'px';
+    dot.style.height = size + 'px';
+    dot.style.top = Math.random()*90 + '%';
+    dot.style.left = Math.random()*90 + '%';
+    dot.style.opacity = Math.random()*0.6 + 0.2;
+    dot.style.animationDuration = (Math.random()*3 + 2) + 's';
+    body.appendChild(dot);
+}
+</script>
 
-<!-- Contenu principal -->
-<div class="main">
+<!-- RETOUR -->
+<a href="index.html" class="back-arrow">&#8592; Retour</a>
 
-    <!-- IMAGE TITRE -->
-    <div class="title-container">
-        <img src="images/IMG_1835-removebg-preview.png" alt="Titre SILENCE">
+<!-- TITRE -->
+<h1>Produit en vedette</h1>
+
+<!-- DESCRIPTION -->
+<p>Une pièce calme et minimaliste. Un message discret.</p>
+<p><strong>Prix : 15 €</strong></p>
+
+<!-- DROPDOWN PRODUITS -->
+<div class="dropdown">
+    <div class="dropdown-button">Découvrir les produits</div>
+    <div class="dropdown-menu">
+        <a href="tshirt.html">T-shirt</a>
+        <a href="pull.html">Pull</a>
+        <a href="jogging.html">Jogging</a>
     </div>
-
-    <!-- SOUS-TITRE -->
-    <div class="subtitle">Grandir en silence</div>
-
-    <!-- LIGNE DÉCORATIVE -->
-    <hr class="divider">
-
-    <!-- TEXTE -->
-    <div class="desc">
-        Bienvenue sur SILENCE, une marque pensée pour ceux qui recherchent la simplicité, le calme et l’essentiel.<br><br>
-        Nous sommes une marque indépendante française actuellement en cours de création, guidée par l’envie de proposer des pièces sobres, durables et intemporelles.<br><br>
-        Chaque détail est réfléchi pour laisser place à l’essentiel : le confort, la qualité et le silence.
-    </div>
-
-    <!-- 30 PARTICULES FLOTANTES ALÉATOIRES -->
-    <script>
-    const main = document.querySelector('.main');
-    for(let i=0;i<30;i++){
-        const dot = document.createElement('div');
-        dot.classList.add('decorative-dot');
-        const size = Math.random() * 8 + 2; // taille entre 2px et 10px
-        dot.style.width = size + 'px';
-        dot.style.height = size + 'px';
-        dot.style.top = Math.random()*90 + '%';
-        dot.style.left = Math.random()*90 + '%';
-        dot.style.opacity = Math.random()*0.6 + 0.2;
-        dot.style.animationDuration = (Math.random()*3 + 2) + 's'; // vitesse 2s à 5s
-        main.appendChild(dot);
-    }
-    </script>
-
 </div>
 
 <!-- PARALLAX TITRE -->
 <script>
 window.addEventListener('scroll', () => {
-    const title = document.querySelector('.title-container');
-    title.style.transform = `translateY(${window.scrollY * 0.1}px) rotate(-90deg)`;
+    const title = document.querySelector('h1');
+    title.style.transform = `translateY(${window.scrollY * 0.05 - 20}px)`;
+});
+</script>
+
+<!-- JS DROPDOWN -->
+<script>
+const dropdown = document.querySelector('.dropdown');
+const button = document.querySelector('.dropdown-button');
+
+button.addEventListener('click', () => {
+    dropdown.classList.toggle('active');
+});
+
+document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+    }
 });
 </script>
 
