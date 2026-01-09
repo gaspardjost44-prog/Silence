@@ -2,145 +2,126 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>SILENCE – Produit</title>
+<title>SILENCE – Collection</title>
+
 <style>
-/* ================== BASE ================== */
 body {
     margin: 0;
-    padding: 20px;
+    padding: 30px;
     font-family: "Helvetica Neue", Arial, sans-serif;
-    text-align: center;
     background: #111;
     color: #f5f5f5;
-    overflow-x: hidden;
-    position: relative;
+    text-align: center;
 }
 
-/* ================== FLECHE RETOUR ================== */
-.back-arrow {
+/* RETOUR */
+.back {
     display: block;
     text-align: left;
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 22px;
     text-decoration: none;
     color: #f5f5f5;
-    transition: color 0.3s ease;
+    margin-bottom: 30px;
 }
 
-.back-arrow:hover {
-    color: #ccc;
-}
-
-/* ================== TITRE ================== */
+/* TITRE */
 h1 {
-    font-size: 36px;
-    margin-bottom: 15px;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: slideFadeIn 1s forwards;
+    font-size: 40px;
+    margin-bottom: 10px;
 }
 
-/* ================== TEXTE ================== */
 p {
-    font-size: 18px;
-    line-height: 1.8;
-    max-width: 600px;
-    margin: 0 auto 20px;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: slideFadeIn 1s forwards 0.5s;
+    opacity: 0.8;
+    margin-bottom: 30px;
 }
 
-/* ================== BOUTON ================== */
-.button-link {
+/* MENU */
+.dropdown {
+    position: relative;
     display: inline-block;
-    padding: 10px 20px;
+}
+
+.dropdown-button {
+    padding: 12px 32px;
     background: #111;
     color: white;
-    text-decoration: none;
-    border-radius: 20px;
-    margin-top: 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    letter-spacing: 1px;
     transition: all 0.3s ease;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: slideFadeIn 1s forwards 0.8s;
 }
 
-.button-link:hover {
-    opacity: 1;
-    box-shadow: 0 0 8px rgba(255,255,255,0.4);
+.dropdown-button:hover {
+    box-shadow: 0 0 12px rgba(255,255,255,0.4);
     transform: translateY(-2px);
 }
 
-/* ================== PARTICULES FLOTTANTES ================== */
-.decorative-dot {
+.dropdown-menu {
     position: absolute;
-    background-color: #888;
-    border-radius: 50%;
-    z-index: 0;
-    animation: float infinite alternate;
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111;
+    border-radius: 15px;
+    padding: 8px 0;
+    min-width: 160px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
 }
 
-@keyframes float {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-20px); }
+.dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
 }
 
-/* ================== ANIMATION FADE + SLIDE ================== */
-@keyframes slideFadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.dropdown-menu a:hover {
+    background: rgba(255,255,255,0.06);
 }
 
-/* ================== RESPONSIVE ================== */
-@media (max-width: 600px) {
-    h1 { font-size: 28px; }
-    p { font-size: 16px; }
+.dropdown.active .dropdown-menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(5px);
 }
 </style>
 </head>
+
 <body>
 
-<!-- PARTICULES FLOTANTES GENERÉES EN JS -->
+<a href="index.html" class="back">← Retour</a>
+
+<h1>Collection SILENCE</h1>
+<p>Minimalisme. Calme. Identité.</p>
+
+<div class="dropdown">
+    <div class="dropdown-button">Mes produits</div>
+    <div class="dropdown-menu">
+        <a href="tshirt.html">T-shirt</a>
+        <a href="pull.html">Pull</a>
+        <a href="jogging.html">Jogging</a>
+    </div>
+</div>
+
 <script>
-const body = document.body;
-for(let i=0; i<20; i++){
-    const dot = document.createElement('div');
-    dot.classList.add('decorative-dot');
-    const size = Math.random() * 8 + 2; // 2px à 10px
-    dot.style.width = size + 'px';
-    dot.style.height = size + 'px';
-    dot.style.top = Math.random()*90 + '%';
-    dot.style.left = Math.random()*90 + '%';
-    dot.style.opacity = Math.random()*0.6 + 0.2;
-    dot.style.animationDuration = (Math.random()*3 + 2) + 's';
-    body.appendChild(dot);
-}
-</script>
+const dropdown = document.querySelector('.dropdown');
+const button = document.querySelector('.dropdown-button');
 
-<!-- RETOUR -->
-<a href="index.html" class="back-arrow">&#8592; Retour</a>
+button.addEventListener('click', () => {
+    dropdown.classList.toggle('active');
+});
 
-<!-- TITRE -->
-<h1>Produit en vedette</h1>
-
-<!-- DESCRIPTION -->
-<p>Une pièce calme et minimaliste. Un message discret.</p>
-<p><strong>Prix : 15 €</strong></p>
-
-<!-- BOUTON -->
-<a href="https://ton-site-de-panier.com" class="button-link">Ajouter au panier</a>
-
-<!-- PARALLAX LEGERE DU TITRE -->
-<script>
-window.addEventListener('scroll', () => {
-    const title = document.querySelector('h1');
-    title.style.transform = `translateY(${window.scrollY * 0.05 - 20}px)`; // légère translation
+document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+    }
 });
 </script>
 
 </body>
 </html>
+
 
