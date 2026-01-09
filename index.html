@@ -2,93 +2,64 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>SILENCE – Produit</title>
+<title>SILENCE</title>
+
 <style>
-/* ================== BASE ================== */
 body {
     margin: 0;
-    padding: 20px;
+    padding: 0;
     font-family: "Helvetica Neue", Arial, sans-serif;
-    text-align: center;
     background: #111;
     color: #f5f5f5;
-    overflow-x: hidden;
-    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-/* ================== FLECHE RETOUR ================== */
-.back-arrow {
-    display: block;
-    text-align: left;
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-decoration: none;
-    color: #f5f5f5;
-    transition: color 0.3s ease;
-}
-
-.back-arrow:hover {
-    color: #ccc;
-}
-
-/* ================== TITRE ================== */
+/* TITRE */
 h1 {
-    font-size: 36px;
-    margin-bottom: 15px;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: slideFadeIn 1s forwards;
+    font-size: 60px;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
 }
 
-/* ================== TEXTE ================== */
-p {
-    font-size: 18px;
-    line-height: 1.8;
-    max-width: 600px;
-    margin: 0 auto 20px;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: slideFadeIn 1s forwards 0.5s;
-}
-
-/* ================== DROPDOWN ================== */
+/* ===== MENU DEROULANT ===== */
 .dropdown {
     position: relative;
     display: inline-block;
-    margin-top: 20px;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: slideFadeIn 1s forwards 0.8s;
 }
 
 .dropdown-button {
-    padding: 10px 25px;
+    padding: 12px 32px;
     background: #111;
     color: white;
-    border-radius: 20px;
+    border-radius: 30px;
     cursor: pointer;
+    letter-spacing: 1px;
     transition: all 0.3s ease;
     box-shadow: 0 0 0 rgba(255,255,255,0);
 }
 
 .dropdown-button:hover {
-    box-shadow: 0 0 8px rgba(255,255,255,0.4);
+    box-shadow: 0 0 12px rgba(255,255,255,0.4);
     transform: translateY(-2px);
 }
 
 .dropdown-menu {
     position: absolute;
-    top: 110%;
+    top: 120%;
     left: 50%;
     transform: translateX(-50%);
     background: #111;
     border-radius: 15px;
-    padding: 10px 0;
+    padding: 8px 0;
     min-width: 160px;
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
     z-index: 10;
 }
 
@@ -101,93 +72,32 @@ p {
 }
 
 .dropdown-menu a:hover {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.06);
 }
 
-/* ouvert */
 .dropdown.active .dropdown-menu {
     opacity: 1;
     pointer-events: auto;
     transform: translateX(-50%) translateY(5px);
 }
-
-/* ================== PARTICULES ================== */
-.decorative-dot {
-    position: absolute;
-    background-color: #888;
-    border-radius: 50%;
-    z-index: 0;
-    animation: float infinite alternate;
-}
-
-@keyframes float {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-20px); }
-}
-
-/* ================== ANIMATION ================== */
-@keyframes slideFadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ================== RESPONSIVE ================== */
-@media (max-width: 600px) {
-    h1 { font-size: 28px; }
-    p { font-size: 16px; }
-}
 </style>
 </head>
+
 <body>
 
-<!-- PARTICULES -->
-<script>
-const body = document.body;
-for(let i=0; i<20; i++){
-    const dot = document.createElement('div');
-    dot.classList.add('decorative-dot');
-    const size = Math.random() * 8 + 2;
-    dot.style.width = size + 'px';
-    dot.style.height = size + 'px';
-    dot.style.top = Math.random()*90 + '%';
-    dot.style.left = Math.random()*90 + '%';
-    dot.style.opacity = Math.random()*0.6 + 0.2;
-    dot.style.animationDuration = (Math.random()*3 + 2) + 's';
-    body.appendChild(dot);
-}
-</script>
+<div>
+    <h1>SILENCE</h1>
 
-<!-- RETOUR -->
-<a href="index.html" class="back-arrow">&#8592; Retour</a>
-
-<!-- TITRE -->
-<h1>Produit en vedette</h1>
-
-<!-- DESCRIPTION -->
-<p>Une pièce calme et minimaliste. Un message discret.</p>
-<p><strong>Prix : 15 €</strong></p>
-
-<!-- DROPDOWN PRODUITS -->
-<div class="dropdown">
-    <div class="dropdown-button">Découvrir les produits</div>
-    <div class="dropdown-menu">
-        <a href="tshirt.html">T-shirt</a>
-        <a href="pull.html">Pull</a>
-        <a href="jogging.html">Jogging</a>
+    <div class="dropdown">
+        <div class="dropdown-button">Mes produits</div>
+        <div class="dropdown-menu">
+            <a href="tshirt.html">T-shirt</a>
+            <a href="pull.html">Pull</a>
+            <a href="jogging.html">Jogging</a>
+        </div>
     </div>
 </div>
 
-<!-- PARALLAX TITRE -->
-<script>
-window.addEventListener('scroll', () => {
-    const title = document.querySelector('h1');
-    title.style.transform = `translateY(${window.scrollY * 0.05 - 20}px)`;
-});
-</script>
-
-<!-- JS DROPDOWN -->
 <script>
 const dropdown = document.querySelector('.dropdown');
 const button = document.querySelector('.dropdown-button');
@@ -205,3 +115,4 @@ document.addEventListener('click', (e) => {
 
 </body>
 </html>
+
