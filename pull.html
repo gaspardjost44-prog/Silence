@@ -7,49 +7,47 @@
 <style>
 body {
     margin: 0;
-    padding: 30px;
+    padding: 0;
     font-family: "Helvetica Neue", Arial, sans-serif;
-    background: #111;
-    color: #f5f5f5;
-    text-align: center;
+    background: #f5f5f5; /* fond clair */
+    color: #111; /* texte noir */
+    min-height: 100vh;
 }
 
-.back {
-    display: block;
-    text-align: left;
+/* NAVBAR FIXE */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 20px; /* padding suffisant */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffffcc; /* blanc semi-transparent */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.logo {
     font-size: 22px;
+    letter-spacing: 3px;
     text-decoration: none;
-    color: #f5f5f5;
-    margin-bottom: 30px;
+    color: #111;
 }
 
-h1 {
-    font-size: 42px;
-}
-
-p {
-    opacity: 0.8;
-}
-
-/* MENU */
+/* MENU DROPDOWN */
 .dropdown {
     position: relative;
-    display: inline-block;
-    margin-top: 30px;
 }
 
 .dropdown-button {
-    padding: 12px 32px;
-    background: #111;
-    color: white;
-    border-radius: 30px;
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.dropdown-button:hover {
-    box-shadow: 0 0 12px rgba(255,255,255,0.4);
-    transform: translateY(-2px);
+    letter-spacing: 1px;
+    padding: 8px 20px;
+    white-space: nowrap;
+    font-size: 16px;
+    color: #111;
 }
 
 .dropdown-menu {
@@ -57,24 +55,27 @@ p {
     top: 120%;
     left: 50%;
     transform: translateX(-50%);
-    background: #111;
-    border-radius: 15px;
+    background: #fff;
+    border-radius: 12px;
     padding: 8px 0;
     min-width: 160px;
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 10;
+    white-space: nowrap;
 }
 
 .dropdown-menu a {
     display: block;
     padding: 10px 20px;
-    color: white;
+    color: #111;
     text-decoration: none;
 }
 
 .dropdown-menu a:hover {
-    background: rgba(255,255,255,0.06);
+    background: rgba(0,0,0,0.05);
 }
 
 .dropdown.active .dropdown-menu {
@@ -82,23 +83,42 @@ p {
     pointer-events: auto;
     transform: translateX(-50%) translateY(5px);
 }
+
+/* CONTENU PRODUIT */
+.content {
+    padding-top: 100px; /* espace sous la navbar */
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 20px;
+    opacity: 0.8;
+}
 </style>
 </head>
-
 <body>
 
-<a href="index.html" class="back">← Accueil</a>
+<div class="navbar">
+    <a href="index.html" class="logo">SILENCE</a>
 
-<h1>Pull SILENCE</h1>
-<p>Chaleur. Calme. Présence.</p>
-
-<div class="dropdown">
-    <div class="dropdown-button">Nos produits</div>
-    <div class="dropdown-menu">
-        <a href="tshirt.html">T-shirt</a>
-        <a href="pull.html">Pull</a>
-        <a href="jogging.html">Jogging</a>
+    <div class="dropdown">
+        <div class="dropdown-button">Nos produits</div>
+        <div class="dropdown-menu">
+            <a href="tshirt.html">T-shirt</a>
+            <a href="pull.html">Pull</a>
+            <a href="jogging.html">Jogging</a>
+        </div>
     </div>
+</div>
+
+<div class="content">
+    <h1>pull SILENCE</h1>
+    <p>Chaleur. Calme. Présence.</p>
 </div>
 
 <script>
@@ -118,4 +138,3 @@ document.addEventListener('click', (e) => {
 
 </body>
 </html>
-
