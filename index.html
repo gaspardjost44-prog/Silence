@@ -20,7 +20,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 20px 60px; /* plus d'espace à droite */
+    padding: 20px 60px; /* espace suffisant à gauche et à droite */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,7 +36,7 @@ body {
     color: #f5f5f5;
 }
 
-/* MENU DEROULE */
+/* DROPDOWN */
 .dropdown {
     position: relative;
 }
@@ -44,12 +44,14 @@ body {
 .dropdown-button {
     cursor: pointer;
     letter-spacing: 1px;
+    padding: 8px 20px;
 }
 
 .dropdown-menu {
     position: absolute;
-    right: 0;
-    top: 150%;
+    top: 120%;
+    left: 50%; /* centre sous le bouton */
+    transform: translateX(-50%);
     background: #111;
     border-radius: 12px;
     padding: 8px 0;
@@ -58,6 +60,7 @@ body {
     pointer-events: none;
     transition: all 0.3s ease;
     box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    z-index: 10;
 }
 
 .dropdown-menu a {
@@ -74,7 +77,7 @@ body {
 .dropdown.active .dropdown-menu {
     opacity: 1;
     pointer-events: auto;
-    transform: translateY(5px);
+    transform: translateX(-50%) translateY(5px);
 }
 
 /* CONTENU ACCUEIL */
