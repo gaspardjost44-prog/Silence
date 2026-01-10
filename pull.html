@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>SILENCE – Pull</title>
 <style>
+/* Même style que tshirt.html, juste changement nom produit et image */
 body {margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#f5f5f5;color:#111;}
 .navbar{position:fixed;top:0;left:0;width:100%;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;background:#ffffffcc;backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(0,0,0,0.1);z-index:100;box-sizing:border-box;}
 .nav-left{display:flex;align-items:center;gap:20px;}
@@ -28,15 +29,16 @@ body {margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#f5f5f5;
 #mini-cart{position:fixed;top:100px;right:20px;width:250px;background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.2);padding:12px;z-index:200;font-size:14px;}
 .mini-cart-header{font-weight:bold;margin-bottom:10px;text-align:center;}
 #mini-cart-items{max-height:250px;overflow-y:auto;}
-.mini-cart-item{padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.1);}
+.mini-cart-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.1);}
 .mini-cart-item:last-child{border-bottom:none;}
+.remove-item{cursor:pointer;padding:4px 8px;background:linear-gradient(135deg,#111,#333);color:#fff;border-radius:20px;transition:all 0.3s ease;user-select:none;}
+.remove-item:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.4);}
 .empty-mini-cart{text-align:center;opacity:0.5;}
 .price{font-size:26px;margin-bottom:20px;font-weight:500;}
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
     <div class="nav-left">
         <a href="index.html" class="logo">SILENCE</a>
@@ -54,7 +56,6 @@ body {margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#f5f5f5;
     </div>
 </div>
 
-<!-- CONTENU -->
 <div class="content">
     <h1>Pull SILENCE</h1>
     <div class="price">50 €</div>
@@ -62,7 +63,7 @@ body {margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#f5f5f5;
         <img src="images/PullExample.jpg" alt="Pull SILENCE">
     </div>
     <div class="description">
-        Pull premium confortable et discret, idéal pour rester silencieux tout en style.
+        Pull premium, chaud et discret. Confort optimal et style silencieux.
     </div>
     <div class="sizes">
         <span>XS</span><span>S</span><span>M</span><span>L</span><span>XL</span>
@@ -70,48 +71,56 @@ body {margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#f5f5f5;
     <button class="add-to-cart">Ajouter au panier</button>
 </div>
 
-<!-- MINI-PANIER -->
 <div id="mini-cart">
     <div class="mini-cart-header">🛒 Panier (<span id="mini-cart-count">0</span>)</div>
     <div id="mini-cart-items"><p class="empty-mini-cart">Aucun article</p></div>
 </div>
 
 <script>
-/* DROPDOWN */
+// Dropdown
 const dropdownBtn = document.querySelector('.dropdown-button');
 const dropdown = document.querySelector('.dropdown');
 dropdownBtn.addEventListener('click',()=>dropdown.classList.toggle('active'));
 document.addEventListener('click',e=>{if(!dropdown.contains(e.target)) dropdown.classList.remove('active');});
 
-/* TAILLES */
+// Taille
 const sizes = document.querySelectorAll('.sizes span');
 let selectedSize = null;
-sizes.forEach(size=>{
-    size.addEventListener('click',()=>{
-        sizes.forEach(s=>s.classList.remove('active'));
-        size.classList.add('active');
-        selectedSize = size.textContent;
-    });
-});
+sizes.forEach(size=>{size.addEventListener('click',()=>{
+    sizes.forEach(s=>s.classList.remove('active'));
+    size.classList.add('active');
+    selectedSize = size.textContent;
+});});
 
-/* MINI-PANIER */
+// Mini-panier
 const miniCartCount = document.getElementById("mini-cart-count");
 const miniCartItems = document.getElementById("mini-cart-items");
 function updateMiniCart(){
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     miniCartCount.textContent = cart.length;
     miniCartItems.innerHTML = "";
-    if(cart.length===0){miniCartItems.innerHTML='<p class="empty-mini-cart">Aucun article</p>'; return;}
-    cart.forEach(item=>{
-        const div=document.createElement("div");
-        div.classList.add("mini-cart-item");
-        div.textContent=`${item.name} – ${item.size}`;
-        miniCartItems.appendChild(div);
-    });
+    if(cart.length===0){miniCartItems.innerHTML='<p class="empty-mini-cart">Aucun article</p>';}
+    else{
+        cart.forEach((item,index)=>{
+            const div = document.createElement("div");
+            div.classList.add("mini-cart-item");
+            div.textContent = `${item.name} – ${item.size}`;
+            const remove = document.createElement("span");
+            remove.classList.add("remove-item");
+            remove.textContent = "❌";
+            remove.addEventListener("click", ()=>{
+                cart.splice(index,1);
+                localStorage.setItem("cart",JSON.stringify(cart));
+                updateMiniCart();
+            });
+            div.appendChild(remove);
+            miniCartItems.appendChild(div);
+        });
+    }
 }
 updateMiniCart();
 
-/* AJOUT PANIER */
+// Ajouter au panier
 const addToCartBtn = document.querySelector('.add-to-cart');
 addToCartBtn.addEventListener('click',()=>{
     if(!selectedSize){alert("Veuillez sélectionner une taille !"); return;}
