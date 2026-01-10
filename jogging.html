@@ -2,152 +2,122 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>SILENCE – Jogging</title>
-
+<title>Jogging – T-shirt</title>
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    background: #f5f5f5;
-    color: #111;
-    min-height: 100vh;
-}
-
-/* NAVBAR FIXE */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #ffffffcc;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    z-index: 100;
-}
-
-.logo {
-    font-size: 22px;
-    letter-spacing: 3px;
-    text-decoration: none;
-    color: #111;
-}
-
-/* MENU DROPDOWN */
-.dropdown {
-    position: relative;
-}
-
-.dropdown-button {
-    cursor: pointer;
-    letter-spacing: 1px;
-    padding: 8px 20px;
-    white-space: nowrap;
-    font-size: 16px;
-    color: #111;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 120%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #fff;
-    border-radius: 12px;
-    padding: 8px 0;
-    min-width: 160px;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    z-index: 10;
-    white-space: nowrap;
-}
-
-.dropdown-menu a {
-    display: block;
-    padding: 10px 20px;
-    color: #111;
-    text-decoration: none;
-}
-
-.dropdown-menu a:hover {
-    background: rgba(0,0,0,0.05);
-}
-
-.dropdown.active .dropdown-menu {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(5px);
-}
-
-/* CONTENU PRODUIT */
-.content {
-    padding-top: 100px;
-    text-align: center;
-}
-
-h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-
-.product-image {
-    margin: 0 auto 20px auto;
-    max-width: 400px;
-}
-
-.product-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-p {
-    font-size: 20px;
-    opacity: 0.8;
-}
+body {margin:0; font-family:"Helvetica Neue",Arial,sans-serif; background:#f5f5f5; color:#111;}
+.navbar{position:fixed;top:0;left:0;width:100%;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;background:#ffffffcc;backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(0,0,0,0.1);z-index:100;box-sizing:border-box;}
+.nav-left{display:flex;align-items:center;gap:20px;}
+.logo{font-size:22px;text-decoration:none;color:#111;letter-spacing:3px;}
+.nav-right a{text-decoration:none;color:#111;font-weight:bold;font-size:16px;flex-shrink:0;}
+.dropdown{position:relative;}
+.dropdown-button{cursor:pointer;padding:8px 20px;font-size:16px;letter-spacing:1px;background:none;border:none;}
+.dropdown-menu{position:absolute;top:100%;left:0;background:#fff;border-radius:12px;padding:8px 0;min-width:160px;opacity:0;pointer-events:none;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(0,0,0,0.2);z-index:150;}
+.dropdown-menu a{display:block;padding:10px 20px;color:#111;text-decoration:none;}
+.dropdown-menu a:hover{background:rgba(0,0,0,0.05);}
+.dropdown.active .dropdown-menu{opacity:1;pointer-events:auto;transform:translateY(5px);}
+.content{padding-top:140px;max-width:900px;margin:0 auto;text-align:center;}
+.product-image img{width:100%;max-width:420px;border-radius:16px;box-shadow:0 8px 22px rgba(0,0,0,0.25);transition:transform 0.4s ease, box-shadow 0.4s ease;margin-bottom:30px;}
+.product-image img:hover{transform:scale(1.05);box-shadow:0 16px 40px rgba(0,0,0,0.4);}
+.sizes span{display:inline-block;margin:0 6px 12px;padding:10px 18px;border:1px solid #111;border-radius:25px;cursor:pointer;transition:all 0.25s ease;user-select:none;}
+.sizes span:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,0.2);}
+.sizes span.active{background:#111;color:#fff;box-shadow:0 4px 14px rgba(0,0,0,0.4);}
+.add-to-cart{padding:16px 50px;background:linear-gradient(135deg,#111,#333);color:#fff;border-radius:40px;border:none;font-size:16px;letter-spacing:2px;cursor:pointer;transition:all 0.3s ease;position:relative;overflow:hidden;margin-top:20px;}
+.add-to-cart::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);transition:all 0.6s ease;}
+.add-to-cart:hover::after{left:100%;}
+.add-to-cart:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,0.4);}
+#mini-cart{position:fixed;top:100px;right:20px;width:250px;background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.2);padding:12px;z-index:200;font-size:14px;}
+.mini-cart-header{font-weight:bold;margin-bottom:10px;text-align:center;}
+#mini-cart-items{max-height:250px;overflow-y:auto;}
+.mini-cart-item{padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.1);}
+.mini-cart-item:last-child{border-bottom:none;}
+.empty-mini-cart{text-align:center;opacity:0.5;}
 </style>
 </head>
 <body>
 
 <div class="navbar">
-    <a href="index.html" class="logo">SILENCE</a>
-
-    <div class="dropdown">
-        <div class="dropdown-button">Nos produits</div>
-        <div class="dropdown-menu">
-            <a href="tshirt.html">T-shirt</a>
-            <a href="pull.html">Pull</a>
-            <a href="jogging.html">Jogging</a>
+    <div class="nav-left">
+        <a href="index.html" class="logo">SILENCE</a>
+        <div class="dropdown">
+            <button class="dropdown-button">Nos produits</button>
+            <div class="dropdown-menu">
+                <a href="tshirt.html">T-shirt</a>
+                <a href="pull.html">Pull</a>
+                <a href="jogging.html">Jogging</a>
+            </div>
         </div>
+    </div>
+    <div class="nav-right">
+        <a href="Panier.html">Panier</a>
     </div>
 </div>
 
 <div class="content">
     <h1>Jogging SILENCE</h1>
+    <div class="price">35 €</div>
     <div class="product-image">
-        <img src="images/Joggingimagetest.webp" alt="T-shirt SILENCE">
+        <img src="images/T-shirtClintEastwood.jpg" alt="T-shirt SILENCE">
     </div>
-    <p>Minimal. Pur. Essentiel.</p>
+    <div class="description">
+        Conçu pour ceux qui avancent sans bruit. Coupe droite, tissu premium, présence discrète.
+    </div>
+    <div class="sizes">
+        <span>XS</span><span>S</span><span>M</span><span>L</span><span>XL</span>
+    </div>
+    <button class="add-to-cart">Ajouter au panier</button>
+</div>
+
+<div id="mini-cart">
+    <div class="mini-cart-header">🛒 Panier (<span id="mini-cart-count">0</span>)</div>
+    <div id="mini-cart-items"><p class="empty-mini-cart">Aucun article</p></div>
 </div>
 
 <script>
+/* DROPDOWN */
+const dropdownBtn = document.querySelector('.dropdown-button');
 const dropdown = document.querySelector('.dropdown');
-const button = document.querySelector('.dropdown-button');
+dropdownBtn.addEventListener('click',()=>dropdown.classList.toggle('active'));
+document.addEventListener('click',e=>{if(!dropdown.contains(e.target)) dropdown.classList.remove('active');});
 
-button.addEventListener('click', () => {
-    dropdown.classList.toggle('active');
+/* TAILLES */
+const sizes = document.querySelectorAll('.sizes span');
+let selectedSize = null;
+sizes.forEach(size=>{
+    size.addEventListener('click',()=>{
+        sizes.forEach(s=>s.classList.remove('active'));
+        size.classList.add('active');
+        selectedSize = size.textContent;
+    });
 });
 
-document.addEventListener('click', (e) => {
-    if (!dropdown.contains(e.target)) {
-        dropdown.classList.remove('active');
-    }
+/* MINI-PANIER */
+const miniCartCount = document.getElementById("mini-cart-count");
+const miniCartItems = document.getElementById("mini-cart-items");
+function updateMiniCart(){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    miniCartCount.textContent = cart.length;
+    miniCartItems.innerHTML = "";
+    if(cart.length===0){miniCartItems.innerHTML='<p class="empty-mini-cart">Aucun article</p>'; return;}
+    cart.forEach(item=>{
+        const div=document.createElement("div");
+        div.classList.add("mini-cart-item");
+        div.textContent=`${item.name} – ${item.size}`;
+        miniCartItems.appendChild(div);
+    });
+}
+updateMiniCart();
+
+/* AJOUT PANIER */
+const addToCartBtn = document.querySelector('.add-to-cart');
+addToCartBtn.addEventListener('click',()=>{
+    if(!selectedSize){alert("Veuillez sélectionner une taille !"); return;}
+    const product={name:"T-shirt SILENCE",size:selectedSize};
+    let cart=JSON.parse(localStorage.getItem("cart"))||[];
+    cart.push(product);
+    localStorage.setItem("cart",JSON.stringify(cart));
+    addToCartBtn.textContent="Ajouté ✓";
+    setTimeout(()=>{addToCartBtn.textContent="Ajouter au panier";},1200);
+    updateMiniCart();
 });
 </script>
 
