@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>SILENCE – Pull</title>
 <style>
+/* ======== BASE & NAVBAR ======== */
 body {margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#f5f5f5;color:#111;}
 .navbar{position:fixed;top:0;left:0;width:100%;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;background:#ffffffcc;backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(0,0,0,0.1);z-index:100;box-sizing:border-box;}
 .nav-left{display:flex;align-items:center;gap:20px;}
@@ -15,6 +16,8 @@ body {margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#f5f5f5;
 .dropdown-menu a{display:block;padding:10px 20px;color:#111;text-decoration:none;}
 .dropdown-menu a:hover{background:rgba(0,0,0,0.05);}
 .dropdown.active .dropdown-menu{opacity:1;pointer-events:auto;transform:translateY(5px);}
+
+/* ======== CONTENU PRODUIT ======== */
 .content{padding-top:140px;max-width:900px;margin:0 auto;text-align:center;}
 .product-image img{width:100%;max-width:420px;border-radius:16px;box-shadow:0 8px 22px rgba(0,0,0,0.25);transition:transform 0.4s ease,box-shadow 0.4s ease;margin-bottom:30px;}
 .product-image img:hover{transform:scale(1.05);box-shadow:0 16px 40px rgba(0,0,0,0.4);}
@@ -29,20 +32,22 @@ h1{font-size:48px;margin-bottom:10px;letter-spacing:2px;}
 .add-to-cart::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);transition:all 0.6s ease;}
 .add-to-cart:hover::after{left:100%;}
 .add-to-cart:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,0.4);}
-#mini-cart{position:fixed;top:100px;right:20px;width:270px;background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.2);padding:12px;z-index:200;font-size:14px;}
-.mini-cart-header{font-weight:bold;margin-bottom:10px;text-align:center;}
-#mini-cart-items{max-height:250px;overflow-y:auto;margin-bottom:10px;}
+
+/* ======== MINI-PANIER ======== */
+#mini-cart-dropdown{position:fixed;top:100px;right:20px;width:270px;z-index:200;font-family:"Helvetica Neue",Arial,sans-serif;}
+#toggle-cart{width:100%;padding:12px;background:linear-gradient(135deg,#111,#333);color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:14px;transition:all 0.3s ease;}
+#toggle-cart:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.4);}
+.cart-content{max-height:0;overflow:hidden;background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.2);margin-top:10px;transition:max-height 0.4s ease,padding 0.3s ease;padding:0 12px;}
+.cart-content.open{max-height:300px;padding:12px;}
 .mini-cart-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.1);}
 .mini-cart-item:last-child{border-bottom:none;}
-.remove-item{cursor:pointer;padding:4px 8px;background:linear-gradient(135deg,#111,#333);color:#fff;border-radius:20px;transition:all 0.3s ease;user-select:none;}
+.remove-item{cursor:pointer;padding:2px 6px;background:linear-gradient(135deg,#111,#333);color:#fff;border-radius:10px;font-weight:bold;transition:all 0.3s ease;}
 .remove-item:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.4);}
-.empty-mini-cart{text-align:center;opacity:0.5;}
-.total-cart{font-weight:bold;text-align:right;font-size:16px;margin-top:5px;}
+.total{font-weight:bold;margin-top:10px;text-align:right;}
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
     <div class="nav-left">
         <a href="index.html" class="logo">SILENCE</a>
@@ -60,32 +65,22 @@ h1{font-size:48px;margin-bottom:10px;letter-spacing:2px;}
     </div>
 </div>
 
-<!-- CONTENU -->
 <div class="content">
     <h1>Pull SILENCE</h1>
     <div class="price">50 €</div>
     <div class="product-image">
         <img src="images/PullExample.jpg" alt="Pull SILENCE">
     </div>
-    <div class="description">
-        Confort et style discret.<br>
-        Tissu premium, coupe moderne, parfaite discrétion.
-    </div>
+    <div class="description">Tissu premium, coupe moderne, discrétion assurée.</div>
     <div class="sizes">
-        <span>XS</span>
-        <span>S</span>
-        <span>M</span>
-        <span>L</span>
-        <span>XL</span>
+        <span>XS</span><span>S</span><span>M</span><span>L</span><span>XL</span>
     </div>
     <button class="add-to-cart">Ajouter au panier</button>
 </div>
 
-<!-- MINI-PANIER -->
-<div id="mini-cart">
-    <div class="mini-cart-header">🛒 Panier (<span id="mini-cart-count">0</span>)</div>
-    <div id="mini-cart-items"><p class="empty-mini-cart">Aucun article</p></div>
-    <div class="total-cart">Total : <span id="cart-total">0</span> €</div>
+<div id="mini-cart-dropdown">
+    <button id="toggle-cart">Ouvrir mon panier : 0 €</button>
+    <div id="mini-cart-items" class="cart-content"></div>
 </div>
 
 <script>
@@ -98,62 +93,84 @@ document.addEventListener('click',e=>{if(!dropdown.contains(e.target)) dropdown.
 // Taille
 const sizes = document.querySelectorAll('.sizes span');
 let selectedSize = null;
-sizes.forEach(size => {
-    size.addEventListener('click', () => {
-        sizes.forEach(s=>s.classList.remove('active'));
-        size.classList.add('active');
-        selectedSize = size.textContent;
+sizes.forEach(s=>{
+    s.addEventListener('click',()=>{
+        sizes.forEach(x=>x.classList.remove('active'));
+        s.classList.add('active');
+        selectedSize = s.textContent;
     });
 });
 
 // Mini-panier
-const addToCartBtn = document.querySelector('.add-to-cart');
-const miniCartCount = document.getElementById("mini-cart-count");
-const miniCartItems = document.getElementById("mini-cart-items");
-const cartTotalElem = document.getElementById("cart-total");
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const miniCartItemsDropdown = document.getElementById("mini-cart-items");
+const toggleCartBtn = document.getElementById("toggle-cart");
 
-function updateMiniCart(){
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    miniCartCount.textContent = cart.length;
-    miniCartItems.innerHTML = "";
-    let total = 0;
-
-    if(cart.length===0){miniCartItems.innerHTML='<p class="empty-mini-cart">Aucun article</p>';}
-    else{
-        cart.forEach((item,index)=>{
-            total += item.price;
-            const div = document.createElement("div");
-            div.classList.add("mini-cart-item");
-            div.textContent = `${item.name} – ${item.size} – ${item.price} €`;
-            const remove = document.createElement("span");
-            remove.classList.add("remove-item");
-            remove.textContent = "❌";
-            remove.addEventListener("click", ()=>{
-                cart.splice(index,1);
-                localStorage.setItem("cart",JSON.stringify(cart));
-                updateMiniCart();
-            });
-            div.appendChild(remove);
-            miniCartItems.appendChild(div);
-        });
+function updateMiniCartDropdown() {
+    miniCartItemsDropdown.innerHTML = "";
+    if(cart.length===0){
+        const empty = document.createElement("p");
+        empty.classList.add("empty-mini-cart");
+        empty.textContent="Aucun article";
+        miniCartItemsDropdown.appendChild(empty);
+        const totalDiv=document.createElement("div");
+        totalDiv.classList.add("total");
+        totalDiv.textContent="Total : 0 €";
+        miniCartItemsDropdown.appendChild(totalDiv);
+        toggleCartBtn.textContent="Ouvrir mon panier : 0 €";
+        return;
     }
-    cartTotalElem.textContent = total;
+    let total=0;
+    cart.forEach((item,index)=>{
+        total+=item.price;
+        const div=document.createElement("div");
+        div.classList.add("mini-cart-item");
+        const itemText=document.createElement("span");
+        itemText.textContent=`${item.name} – ${item.size} – ${item.price} €`;
+        div.appendChild(itemText);
+        const removeBtn=document.createElement("span");
+        removeBtn.classList.add("remove-item");
+        removeBtn.textContent="❌";
+        removeBtn.addEventListener("click",()=>{
+            cart.splice(index,1);
+            localStorage.setItem("cart",JSON.stringify(cart));
+            updateMiniCartDropdown();
+        });
+        div.appendChild(removeBtn);
+        miniCartItemsDropdown.appendChild(div);
+    });
+    const totalDiv=document.createElement("div");
+    totalDiv.classList.add("total");
+    totalDiv.textContent=`Total : ${total} €`;
+    miniCartItemsDropdown.appendChild(totalDiv);
+    toggleCartBtn.textContent=`Ouvrir mon panier : ${total} €`;
 }
-updateMiniCart();
+
+toggleCartBtn.addEventListener("click",()=>{
+    miniCartItemsDropdown.classList.toggle("open");
+    if(miniCartItemsDropdown.classList.contains("open")){
+        toggleCartBtn.textContent="Fermer le panier";
+    } else {
+        const total=cart.reduce((sum,item)=>sum+item.price,0);
+        toggleCartBtn.textContent=`Ouvrir mon panier : ${total} €`;
+    }
+});
 
 // Ajouter au panier
-addToCartBtn.addEventListener('click', ()=>{
+const addToCartBtn=document.querySelector('.add-to-cart');
+addToCartBtn.addEventListener('click',()=>{
     if(!selectedSize){alert("Veuillez sélectionner une taille avant d'ajouter au panier."); return;}
-    const product = {name:"Pull SILENCE", size:selectedSize, price:50};
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.push(product);
+    cart.push({name:"Pull SILENCE",size:selectedSize,price:50});
     localStorage.setItem("cart",JSON.stringify(cart));
-    addToCartBtn.textContent = "Ajouté ✓";
+    addToCartBtn.textContent="Ajouté ✓";
     setTimeout(()=>{addToCartBtn.textContent="Ajouter au panier";},1200);
-    updateMiniCart();
+    updateMiniCartDropdown();
 });
-</script>
 
+// Initialisation
+updateMiniCartDropdown();
+</script>
 </body>
 </html>
+
 
