@@ -4,35 +4,194 @@
 <meta charset="UTF-8">
 <title>SILENCE – Accueil</title>
 <style>
-body {margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#f5f5f5;color:#111;}
-.navbar{position:fixed;top:0;left:0;width:100%;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;background:#ffffffcc;backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(0,0,0,0.1);z-index:100;box-sizing:border-box;}
-.nav-left{display:flex;align-items:center;gap:20px;}
-.logo{font-size:22px;text-decoration:none;color:#111;letter-spacing:3px;}
-.nav-right a{text-decoration:none;color:#111;font-weight:bold;font-size:16px;flex-shrink:0;}
-.dropdown{position:relative;}
-.dropdown-button{cursor:pointer;padding:8px 20px;font-size:16px;letter-spacing:1px;background:none;border:none;}
-.dropdown-menu{position:absolute;top:100%;left:0;background:#fff;border-radius:12px;padding:8px 0;min-width:160px;opacity:0;pointer-events:none;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(0,0,0,0.2);z-index:150;}
-.dropdown-menu a{display:block;padding:10px 20px;color:#111;text-decoration:none;}
-.dropdown-menu a:hover{background:rgba(0,0,0,0.05);}
-.dropdown.active .dropdown-menu{opacity:1;pointer-events:auto;transform:translateY(5px);}
-.content{padding-top:140px;max-width:900px;margin:0 auto;text-align:center;}
-.hero-image img{width:100%;max-width:700px;border-radius:16px;box-shadow:0 8px 22px rgba(0,0,0,0.25);transition:transform 0.4s ease,box-shadow 0.4s ease;margin-bottom:30px;}
-.hero-image img:hover{transform:scale(1.02);box-shadow:0 12px 30px rgba(0,0,0,0.3);}
-#mini-cart{position:fixed;top:100px;right:20px;width:270px;background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.2);padding:12px;z-index:200;font-size:14px;}
-.mini-cart-header{font-weight:bold;margin-bottom:10px;text-align:center;}
-#mini-cart-items{max-height:250px;overflow-y:auto;margin-bottom:10px;}
-.mini-cart-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.1);}
-.mini-cart-item:last-child{border-bottom:none;}
-.remove-item{cursor:pointer;padding:4px 8px;background:linear-gradient(135deg,#111,#333);color:#fff;border-radius:20px;transition:all 0.3s ease;user-select:none;}
-.remove-item:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.4);}
-.empty-mini-cart{text-align:center;opacity:0.5;}
-.total-cart{font-weight:bold;text-align:right;font-size:16px;margin-top:5px;}
-h1{font-size:48px;margin-bottom:20px;letter-spacing:2px;}
-p{font-size:18px;line-height:1.6;margin-bottom:30px;}
-.button-link{padding:16px 50px;background:linear-gradient(135deg,#111,#333);color:#fff;border-radius:40px;border:none;font-size:16px;letter-spacing:2px;cursor:pointer;transition:all 0.3s ease;position:relative;overflow:hidden;text-decoration:none;display:inline-block;}
-.button-link::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);transition:all 0.6s ease;}
-.button-link:hover::after{left:100%;}
-.button-link:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,0.4);}
+/* ================== BASE ================== */
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background: #f5f5f5;
+    color: #111;
+}
+
+/* ================== NAVBAR ================== */
+.navbar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffffcc;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 100;
+    box-sizing: border-box;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 22px;
+    letter-spacing: 3px;
+    text-decoration: none;
+    color: #111;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-button {
+    cursor: pointer;
+    padding: 8px 20px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    background: none;
+    border: none;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border-radius: 12px;
+    padding: 8px 0;
+    min-width: 160px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 150;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: #111;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.dropdown.active .dropdown-menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(5px);
+}
+
+.nav-right a {
+    text-decoration: none;
+    color: #111;
+    font-weight: bold;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+/* ================== CONTENU ================== */
+.content {
+    padding-top: 140px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.product-image img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 16px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+    margin-bottom: 30px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.product-image img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    opacity: 0.85;
+    margin-bottom: 35px;
+}
+
+/* ================== MINI-PANIER DÉROULANT ================== */
+#mini-cart-dropdown {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 250px;
+    z-index: 200;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+#toggle-cart {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg,#111,#333);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+#toggle-cart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.cart-content {
+    max-height: 0;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    margin-top: 10px;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 12px;
+}
+
+.cart-content.open {
+    max-height: 300px;
+    padding: 12px;
+}
+
+.mini-cart-item {
+    padding: 6px 0;
+    border-bottom:1px solid rgba(0,0,0,0.1);
+}
+
+.mini-cart-item:last-child { border-bottom:none; }
+.empty-mini-cart { text-align:center; opacity:0.5; }
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 700px) {
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 20px;
+    }
+    .nav-right {
+        margin-top: 10px;
+    }
+}
 </style>
 </head>
 <body>
@@ -55,62 +214,73 @@ p{font-size:18px;line-height:1.6;margin-bottom:30px;}
     </div>
 </div>
 
-<!-- CONTENU -->
+<!-- CONTENU ACCUEIL -->
 <div class="content">
     <h1>Bienvenue chez SILENCE</h1>
-    <p>Découvrez notre collection premium : T-shirts, Pulls et Joggings pour avancer discrètement avec style.</p>
-    <div class="hero-image">
-        <img src="images/HeroExample.jpg" alt="Collection SILENCE">
+    <div class="product-image">
+        <img src="images/T-shirtClintEastwood.jpg" alt="T-shirt SILENCE Clint Eastwood">
     </div>
-    <a href="tshirt.html" class="button-link">Découvrir les produits</a>
+    <div class="description">
+        Découvrez nos produits premium, minimalistes et discrets.  
+        Qualité et style sans compromis.
+    </div>
 </div>
 
-<!-- MINI-PANIER -->
-<div id="mini-cart">
-    <div class="mini-cart-header">🛒 Panier (<span id="mini-cart-count">0</span>)</div>
-    <div id="mini-cart-items"><p class="empty-mini-cart">Aucun article</p></div>
-    <div class="total-cart">Total : <span id="cart-total">0</span> €</div>
+<!-- MINI-PANIER DÉROULANT -->
+<div id="mini-cart-dropdown">
+    <button id="toggle-cart">Ouvrir mon panier : 0 €</button>
+    <div id="mini-cart-items" class="cart-content">
+        <p class="empty-mini-cart">Aucun article</p>
+    </div>
 </div>
 
 <script>
-// Dropdown
-const dropdownBtn = document.querySelector('.dropdown-button');
-const dropdown = document.querySelector('.dropdown');
-dropdownBtn.addEventListener('click',()=>dropdown.classList.toggle('active'));
-document.addEventListener('click',e=>{if(!dropdown.contains(e.target)) dropdown.classList.remove('active');});
+/* DROPDOWN */
+const dropdownBtn = document.querySelectorAll('.dropdown-button');
+dropdownBtn.forEach(btn=>{
+    const dropdown = btn.parentElement;
+    btn.addEventListener('click', ()=>dropdown.classList.toggle('active'));
+});
+document.addEventListener('click', e => {
+    dropdownBtn.forEach(btn => {
+        if(!btn.parentElement.contains(e.target)) btn.parentElement.classList.remove('active');
+    });
+});
 
-// Mini-panier
-const miniCartCount = document.getElementById("mini-cart-count");
+/* MINI-PANIER DÉROULANT */
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 const miniCartItems = document.getElementById("mini-cart-items");
-const cartTotalElem = document.getElementById("cart-total");
+const toggleCartBtn = document.getElementById("toggle-cart");
 
-function updateMiniCart(){
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    miniCartCount.textContent = cart.length;
-    miniCartItems.innerHTML = "";
+function updateMiniCart() {
     let total = 0;
-
-    if(cart.length===0){miniCartItems.innerHTML='<p class="empty-mini-cart">Aucun article</p>';}
-    else{
-        cart.forEach((item,index)=>{
-            total += item.price; // ajouter le prix
+    miniCartItems.innerHTML = "";
+    if(cart.length === 0){
+        miniCartItems.innerHTML = '<p class="empty-mini-cart">Aucun article</p>';
+    } else {
+        cart.forEach(item => {
+            total += item.price;
             const div = document.createElement("div");
             div.classList.add("mini-cart-item");
             div.textContent = `${item.name} – ${item.size} – ${item.price} €`;
-            const remove = document.createElement("span");
-            remove.classList.add("remove-item");
-            remove.textContent = "❌";
-            remove.addEventListener("click", ()=>{
-                cart.splice(index,1);
-                localStorage.setItem("cart",JSON.stringify(cart));
-                updateMiniCart();
-            });
-            div.appendChild(remove);
             miniCartItems.appendChild(div);
         });
     }
-    cartTotalElem.textContent = total;
+    toggleCartBtn.textContent = `Ouvrir mon panier : ${total} €`;
 }
+
+// Bouton pour ouvrir/fermer le mini-panier
+toggleCartBtn.addEventListener("click", () => {
+    miniCartItems.classList.toggle("open");
+    if(miniCartItems.classList.contains("open")){
+        toggleCartBtn.textContent = "Fermer le panier";
+    } else {
+        let total = cart.reduce((sum,item)=>sum+item.price,0);
+        toggleCartBtn.textContent = `Ouvrir mon panier : ${total} €`;
+    }
+});
+
+// Initialisation
 updateMiniCart();
 </script>
 
