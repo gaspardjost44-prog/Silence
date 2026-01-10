@@ -15,7 +15,8 @@ body {
 /* NAVBAR */
 .navbar {
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     padding: 15px 30px;
     display: flex;
@@ -73,77 +74,90 @@ body {
     text-align: center;
 }
 
-h1 { margin-bottom: 20px; letter-spacing: 1px; }
+h1 {
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    font-size: 36px;
+}
 
-/* TABLEAU PANIER */
+/* TABLEAU PANIER PREMIUM */
 .cart-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 10px;
     margin-bottom: 30px;
 }
+
 .cart-table th, .cart-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 15px 20px;
     text-align: left;
 }
+
 .cart-table th {
-    background: #eee;
+    background: #111;
+    color: #fff;
     font-weight: 600;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
+
+.cart-table td {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    vertical-align: middle;
+}
+
+/* BOUTON SUPPRIMER */
 .remove-item {
     cursor: pointer;
-    padding: 4px 10px;
+    padding: 8px 14px;
     background: linear-gradient(135deg,#111,#333);
     color: #fff;
-    border-radius: 20px;
+    border-radius: 30px;
+    font-size: 14px;
     transition: all 0.3s ease;
+    display: inline-block;
 }
-.remove-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+.remove-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
 
+/* TOTAL */
 .total {
     text-align: right;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
-/* BOUTON PAIEMENT */
+/* BOUTON PAIEMENT PREMIUM */
 .checkout-btn {
     display: inline-block;
-    padding: 14px 50px;
+    padding: 16px 60px;
     background: linear-gradient(135deg,#111,#333);
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     letter-spacing: 2px;
     border-radius: 40px;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 20px;
+    margin-top: 30px;
 }
-.checkout-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
-
-/* MINI-PANIER */
-#mini-cart {
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    width: 250px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    padding: 12px;
-    z-index: 200;
-    font-size: 14px;
+.checkout-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
-.mini-cart-header { font-weight: bold; margin-bottom: 10px; text-align: center; }
-#mini-cart-items { max-height: 250px; overflow-y: auto; }
-.mini-cart-item { padding: 6px 0; border-bottom:1px solid rgba(0,0,0,0.1); }
-.mini-cart-item:last-child { border-bottom:none; }
-.empty-mini-cart { text-align:center; opacity:0.5; }
 
-/* EMPTY CART MESSAGE */
-.empty-cart { opacity:0.5; margin-top:40px; font-size:16px; text-align:center; }
+/* MESSAGE PANIER VIDE */
+.empty-cart {
+    opacity:0.5;
+    margin-top:40px;
+    font-size:16px;
+    text-align:center;
+}
 </style>
 </head>
 <body>
@@ -166,6 +180,7 @@ h1 { margin-bottom: 20px; letter-spacing: 1px; }
     </div>
 </div>
 
+<!-- CONTENU -->
 <div class="content">
     <h1>Votre Panier</h1>
     <table class="cart-table">
@@ -181,17 +196,10 @@ h1 { margin-bottom: 20px; letter-spacing: 1px; }
             <!-- Les articles seront ajoutés via JS -->
         </tbody>
     </table>
+
     <div class="total">Total : <span id="cart-total">0</span> €</div>
     <button class="checkout-btn" onclick="location.href='paiement.html'">Passer au paiement</button>
     <p class="empty-cart">Aucun article dans le panier</p>
-</div>
-
-<!-- MINI-PANIER -->
-<div id="mini-cart">
-    <div class="mini-cart-header">🛒 Panier (<span id="mini-cart-count">0</span>)</div>
-    <div id="mini-cart-items">
-        <p class="empty-mini-cart">Aucun article</p>
-    </div>
 </div>
 
 <script>
@@ -206,8 +214,6 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 const cartItemsTable = document.getElementById("cart-items");
 const totalElem = document.getElementById("cart-total");
 const emptyCartMsg = document.querySelector(".empty-cart");
-const miniCartCount = document.getElementById("mini-cart-count");
-const miniCartItems = document.getElementById("mini-cart-items");
 
 function renderCart(){
     cartItemsTable.innerHTML = "";
@@ -229,7 +235,6 @@ function renderCart(){
                 cart.splice(index,1);
                 localStorage.setItem("cart",JSON.stringify(cart));
                 renderCart();
-                updateMiniCart();
             });
             cartItemsTable.appendChild(tr);
         });
@@ -237,26 +242,10 @@ function renderCart(){
     totalElem.textContent = total;
 }
 
-/* MINI-PANIER */
-function updateMiniCart(){
-    miniCartCount.textContent = cart.length;
-    miniCartItems.innerHTML = "";
-    if(cart.length===0){
-        miniCartItems.innerHTML='<p class="empty-mini-cart">Aucun article</p>';
-        return;
-    }
-    cart.forEach(item=>{
-        const div=document.createElement("div");
-        div.classList.add("mini-cart-item");
-        div.textContent=`${item.name} – ${item.size} – ${item.price} €`;
-        miniCartItems.appendChild(div);
-    });
-}
-
 /* Initialisation */
 renderCart();
-updateMiniCart();
 </script>
 
 </body>
 </html>
+
