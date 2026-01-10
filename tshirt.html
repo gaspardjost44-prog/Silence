@@ -90,7 +90,7 @@ const sizes = document.querySelectorAll('.sizes span');
 let selectedSize = null;
 sizes.forEach(size=>{size.addEventListener('click',()=>{sizes.forEach(s=>s.classList.remove('active'));size.classList.add('active');selectedSize=size.textContent;});});
 
-// Mini-panier déroulant
+// Mini-panier déroulant avec croix fonctionnelle
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 const miniCartItemsDropdown = document.getElementById("mini-cart-items");
 const toggleCartBtn = document.getElementById("toggle-cart");
@@ -98,14 +98,17 @@ const toggleCartBtn = document.getElementById("toggle-cart");
 function updateMiniCartDropdown(){
     let total=0;
     miniCartItemsDropdown.innerHTML="";
-    if(cart.length===0){miniCartItemsDropdown.innerHTML='<p class="empty-mini-cart">Aucun article</p><div class="total">Total : 0 €</div>';}
-    else{
+    if(cart.length===0){
+        miniCartItemsDropdown.innerHTML='<p class="empty-mini-cart">Aucun article</p><div class="total">Total : 0 €</div>';
+    } else {
         cart.forEach((item,index)=>{
             total+=item.price;
             const div=document.createElement("div");
             div.classList.add("mini-cart-item");
             div.innerHTML=`${item.name} – ${item.size} – ${item.price} € <span class="remove-item">❌</span>`;
-            div.querySelector(".remove-item").addEventListener("click",()=>{
+            // suppression fonctionnelle
+            const removeBtn = div.querySelector(".remove-item");
+            removeBtn.addEventListener("click",()=>{
                 cart.splice(index,1);
                 localStorage.setItem("cart",JSON.stringify(cart));
                 updateMiniCartDropdown();
@@ -138,3 +141,4 @@ addToCartBtn.addEventListener('click',()=>{
 
 </body>
 </html>
+
