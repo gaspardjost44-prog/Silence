@@ -26,7 +26,6 @@ body {
     backdrop-filter: blur(8px);
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     z-index: 100;
-    box-sizing: border-box;
 }
 
 .nav-left {
@@ -135,7 +134,7 @@ h1 {
     position: fixed;
     top: 100px;
     right: 20px;
-    width: 250px;
+    width: 270px;
     z-index: 200;
     font-family: "Helvetica Neue", Arial, sans-serif;
 }
@@ -174,12 +173,36 @@ h1 {
 }
 
 .mini-cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 6px 0;
     border-bottom:1px solid rgba(0,0,0,0.1);
+    font-size: 14px;
 }
 
 .mini-cart-item:last-child { border-bottom:none; }
-.empty-mini-cart { text-align:center; opacity:0.5; }
+
+.remove-item {
+    cursor: pointer;
+    padding: 2px 6px;
+    background: linear-gradient(135deg,#111,#333);
+    color: #fff;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.remove-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.total {
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: right;
+}
 
 /* ================== RESPONSIVE ================== */
 @media (max-width: 700px) {
@@ -214,7 +237,7 @@ h1 {
     </div>
 </div>
 
-<!-- CONTENU ACCUEIL -->
+<!-- CONTENU -->
 <div class="content">
     <h1>Bienvenue chez SILENCE</h1>
     <div class="product-image">
@@ -231,6 +254,7 @@ h1 {
     <button id="toggle-cart">Ouvrir mon panier : 0 €</button>
     <div id="mini-cart-items" class="cart-content">
         <p class="empty-mini-cart">Aucun article</p>
+        <div class="total">Total : 0 €</div>
     </div>
 </div>
 
@@ -247,7 +271,7 @@ document.addEventListener('click', e => {
     });
 });
 
-/* MINI-PANIER DÉROULANT */
+/* MINI-PANIER DÉROULANT AVEC CROIX ET TOTAL */
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 const miniCartItems = document.getElementById("mini-cart-items");
 const toggleCartBtn = document.getElementById("toggle-cart");
@@ -257,19 +281,26 @@ function updateMiniCart() {
     miniCartItems.innerHTML = "";
     if(cart.length === 0){
         miniCartItems.innerHTML = '<p class="empty-mini-cart">Aucun article</p>';
+        miniCartItems.innerHTML += `<div class="total">Total : 0 €</div>`;
     } else {
-        cart.forEach(item => {
+        cart.forEach((item,index) => {
             total += item.price;
             const div = document.createElement("div");
             div.classList.add("mini-cart-item");
-            div.textContent = `${item.name} – ${item.size} – ${item.price} €`;
+            div.innerHTML = `${item.name} – ${item.size} – ${item.price} € <span class="remove-item">❌</span>`;
+            div.querySelector(".remove-item").addEventListener("click", ()=>{
+                cart.splice(index,1);
+                localStorage.setItem("cart",JSON.stringify(cart));
+                updateMiniCart();
+            });
             miniCartItems.appendChild(div);
         });
+        miniCartItems.innerHTML += `<div class="total">Total : ${total} €</div>`;
     }
     toggleCartBtn.textContent = `Ouvrir mon panier : ${total} €`;
 }
 
-// Bouton pour ouvrir/fermer le mini-panier
+/* Bouton pour ouvrir/fermer le mini-panier */
 toggleCartBtn.addEventListener("click", () => {
     miniCartItems.classList.toggle("open");
     if(miniCartItems.classList.contains("open")){
@@ -286,3 +317,4 @@ updateMiniCart();
 
 </body>
 </html>
+
