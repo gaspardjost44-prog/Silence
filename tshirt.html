@@ -103,6 +103,7 @@ h1 {
     font-weight: 500;
 }
 
+/* IMAGE */
 .product-image {
     max-width: 420px;
     margin: 0 auto 25px;
@@ -112,6 +113,11 @@ h1 {
     width: 100%;
     border-radius: 14px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.product-image img:hover {
+    transform: scale(1.03);
 }
 
 /* DESCRIPTION */
@@ -129,7 +135,7 @@ h1 {
 
 .sizes span {
     display: inline-block;
-    margin: 0 8px;
+    margin: 0 6px 10px;
     padding: 10px 16px;
     border: 1px solid #111;
     border-radius: 20px;
@@ -142,15 +148,21 @@ h1 {
     color: #fff;
 }
 
+.sizes span.active {
+    background: #111;
+    color: #fff;
+}
+
 /* BOUTON PANIER */
 .add-to-cart {
-    display: inline-block;
     padding: 14px 40px;
     background: #111;
     color: #fff;
     border-radius: 30px;
-    text-decoration: none;
+    border: none;
+    font-size: 16px;
     letter-spacing: 1px;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 
@@ -180,7 +192,7 @@ h1 {
     <div class="price">35 €</div>
 
     <div class="product-image">
-        <img src="images/T-shirtClintEastwood.jpg" alt="T-shirt SILENCE">
+        <img src="images/T-shirtClintEastwood.jpg" alt="T-shirt SILENCE Clint Eastwood">
     </div>
 
     <div class="description">
@@ -197,10 +209,11 @@ h1 {
         <span>XL</span>
     </div>
 
-    <a href="#" class="add-to-cart">Ajouter au panier</a>
+    <button class="add-to-cart">Ajouter au panier</button>
 </div>
 
 <script>
+/* DROPDOWN */
 const dropdown = document.querySelector('.dropdown');
 const button = document.querySelector('.dropdown-button');
 
@@ -211,6 +224,28 @@ button.addEventListener('click', () => {
 document.addEventListener('click', (e) => {
     if (!dropdown.contains(e.target)) {
         dropdown.classList.remove('active');
+    }
+});
+
+/* TAILLES ACTIVES + PANIER */
+const sizes = document.querySelectorAll('.sizes span');
+const addToCartBtn = document.querySelector('.add-to-cart');
+
+let selectedSize = null;
+
+sizes.forEach(size => {
+    size.addEventListener('click', () => {
+        sizes.forEach(s => s.classList.remove('active'));
+        size.classList.add('active');
+        selectedSize = size.textContent;
+    });
+});
+
+addToCartBtn.addEventListener('click', () => {
+    if (!selectedSize) {
+        alert("Veuillez sélectionner une taille avant d'ajouter au panier.");
+    } else {
+        alert("T-shirt SILENCE – taille " + selectedSize + " ajouté au panier 🖤");
     }
 });
 </script>
