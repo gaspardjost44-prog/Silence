@@ -19,18 +19,35 @@ body {
     width: 100%;
     padding: 15px 30px;
     display: flex;
-    justify-content: space-between; /* logo + nav gauche / panier à droite */
+    justify-content: space-between;
     align-items: center;
     background: #ffffffcc;
     backdrop-filter: blur(8px);
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     z-index: 100;
+    box-sizing: border-box;
 }
 
-.nav-left { display: flex; align-items: center; gap: 20px; }
-.logo { font-size: 22px; text-decoration: none; color: #111; letter-spacing: 3px; }
-.nav-right { display: flex; align-items: center; }
-.nav-right a { text-decoration: none; color: #111; font-weight: bold; font-size: 16px; margin-left: 25px; }
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* espace entre logo et dropdown */
+}
+
+.logo {
+    font-size: 22px;
+    text-decoration: none;
+    color: #111;
+    letter-spacing: 3px;
+}
+
+.nav-right a {
+    text-decoration: none;
+    color: #111;
+    font-weight: bold;
+    font-size: 16px;
+    flex-shrink: 0;
+}
 
 /* DROPDOWN */
 .dropdown { position: relative; }
@@ -68,45 +85,59 @@ body {
 /* CONTENU */
 .content {
     padding-top: 140px;
-    max-width: 500px;
+    max-width: 900px;
     margin: 0 auto;
     text-align: center;
+}
+
+h1 {
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    font-size: 36px;
+}
+
+/* FORMULAIRE PAIEMENT */
+.payment-form {
     background: #fff;
-    border-radius: 20px;
-    padding: 40px 30px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: left;
 }
 
-h1 { margin-bottom: 25px; letter-spacing: 1px; font-size:32px; }
+.payment-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
 
-/* FORMULAIRE */
-form { display: flex; flex-direction: column; gap: 20px; }
-input {
-    padding: 12px 15px;
+.payment-form input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 16px;
-    outline: none;
-    transition: all 0.3s ease;
 }
-input:focus { border-color: #111; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
-/* TOTAL & BOUTON */
-.total { font-size: 20px; font-weight: bold; text-align: right; margin-top: 10px; }
-.pay-btn {
-    padding: 14px 50px;
+.payment-form button {
+    width: 100%;
+    padding: 16px;
     background: linear-gradient(135deg,#111,#333);
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     letter-spacing: 2px;
-    border-radius: 40px;
     border: none;
+    border-radius: 40px;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 20px;
 }
-.pay-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
-.empty-cart { opacity:0.5; text-align:center; margin-top:30px; }
+.payment-form button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
 </style>
 </head>
 <body>
@@ -131,19 +162,21 @@ input:focus { border-color: #111; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
 <div class="content">
     <h1>Paiement</h1>
+    <div class="payment-form">
+        <label for="name">Nom complet</label>
+        <input type="text" id="name" placeholder="Ex: Jean Dupont">
 
-    <div id="cart-total-display"></div>
+        <label for="card">Numéro de carte</label>
+        <input type="text" id="card" placeholder="0000 0000 0000 0000">
 
-    <form id="payment-form">
-        <input type="text" id="name" placeholder="Nom complet" required>
-        <input type="email" id="email" placeholder="Email" required>
-        <input type="text" id="address" placeholder="Adresse" required>
-        <input type="text" id="card" placeholder="Numéro de carte bancaire" required>
-        <div class="total">Total : <span id="cart-total">0</span> €</div>
-        <button type="submit" class="pay-btn">Payer maintenant</button>
-    </form>
+        <label for="expiry">Date d’expiration</label>
+        <input type="text" id="expiry" placeholder="MM/AA">
 
-    <p class="empty-cart">Votre panier est vide</p>
+        <label for="cvc">CVC</label>
+        <input type="text" id="cvc" placeholder="123">
+
+        <button>Payer</button>
+    </div>
 </div>
 
 <script>
@@ -152,37 +185,6 @@ const dropdownBtn = document.querySelector('.dropdown-button');
 const dropdown = document.querySelector('.dropdown');
 dropdownBtn.addEventListener('click',()=>dropdown.classList.toggle('active'));
 document.addEventListener('click', e => { if(!dropdown.contains(e.target)) dropdown.classList.remove('active'); });
-
-/* PANIER */
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-const cartTotalElem = document.getElementById("cart-total");
-const emptyCartMsg = document.querySelector(".empty-cart");
-const cartTotalDisplay = document.getElementById("cart-total-display");
-const form = document.getElementById("payment-form");
-
-function updateTotal(){
-    let total = 0;
-    cart.forEach(item=>total+=item.price);
-    cartTotalElem.textContent = total;
-    if(cart.length===0){
-        emptyCartMsg.style.display="block";
-        form.style.display="none";
-    } else {
-        emptyCartMsg.style.display="none";
-        form.style.display="flex";
-    }
-    cartTotalDisplay.textContent = cart.length>0 ? `Vous allez payer ${total} € pour ${cart.length} article(s)` : '';
-}
-
-updateTotal();
-
-/* FORMULAIRE DE PAIEMENT SIMULÉ */
-form.addEventListener("submit", e=>{
-    e.preventDefault();
-    alert("Paiement effectué avec succès ! Merci pour votre commande.");
-    localStorage.removeItem("cart");
-    updateTotal();
-});
 </script>
 
 </body>
