@@ -30,11 +30,9 @@ body {margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#f5f5f5;
 #mini-cart-items{max-height:250px;overflow-y:auto;}
 .mini-cart-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.1);}
 .mini-cart-item:last-child{border-bottom:none;}
-.remove-item{cursor:pointer;color:red;font-weight:bold;margin-left:10px;}
+.remove-item{cursor:pointer;padding:4px 8px;background:linear-gradient(135deg,#111,#333);color:#fff;border-radius:20px;transition:all 0.3s ease;user-select:none;}
+.remove-item:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.4);}
 .empty-mini-cart{text-align:center;opacity:0.5;}
-.cart-item{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;border-bottom:1px solid rgba(0,0,0,0.1);border-radius:8px;margin-bottom:10px;background:#fff;box-shadow:0 3px 8px rgba(0,0,0,0.1);}
-.cart-item:last-child{border-bottom:none;margin-bottom:0;}
-.empty-cart{text-align:center;opacity:0.5;margin-top:40px;font-size:16px;}
 .price{font-size:26px;margin-bottom:20px;font-weight:500;}
 </style>
 </head>
@@ -98,16 +96,12 @@ sizes.forEach(size=>{
     });
 });
 
-/* PANIER + MINI-PANIER */
+/* MINI-PANIER */
 const miniCartCount = document.getElementById("mini-cart-count");
 const miniCartItems = document.getElementById("mini-cart-items");
-const cartItemsDiv = document.createElement("div"); // utilisé si besoin pour panier principal
-document.querySelector(".content").appendChild(cartItemsDiv);
 
-function updateCartDisplay(){
+function updateMiniCart(){
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    // Mini-panier
     miniCartCount.textContent = cart.length;
     miniCartItems.innerHTML = "";
     if(cart.length===0){miniCartItems.innerHTML='<p class="empty-mini-cart">Aucun article</p>';}
@@ -116,43 +110,23 @@ function updateCartDisplay(){
             const div = document.createElement("div");
             div.classList.add("mini-cart-item");
             div.textContent = `${item.name} – ${item.size}`;
-            
-            // Bouton croix pour supprimer
+
+            // Bouton croix stylé noir
             const remove = document.createElement("span");
             remove.classList.add("remove-item");
             remove.textContent = "❌";
             remove.addEventListener("click", ()=>{
                 cart.splice(index,1);
                 localStorage.setItem("cart",JSON.stringify(cart));
-                updateCartDisplay();
+                updateMiniCart();
             });
+
             div.appendChild(remove);
             miniCartItems.appendChild(div);
         });
     }
-
-    // Panier principal (optionnel sur page produit)
-    cartItemsDiv.innerHTML = "";
-    if(cart.length===0){cartItemsDiv.innerHTML='<p class="empty-cart">Votre panier est vide</p>';}
-    else{
-        cart.forEach((item,index)=>{
-            const div=document.createElement("div");
-            div.classList.add("cart-item");
-            div.textContent = `${item.name} – Taille : ${item.size}`;
-            const remove = document.createElement("span");
-            remove.classList.add("remove-item");
-            remove.textContent="❌";
-            remove.addEventListener("click", ()=>{
-                cart.splice(index,1);
-                localStorage.setItem("cart",JSON.stringify(cart));
-                updateCartDisplay();
-            });
-            div.appendChild(remove);
-            cartItemsDiv.appendChild(div);
-        });
-    }
 }
-updateCartDisplay();
+updateMiniCart();
 
 /* AJOUT PANIER */
 const addToCartBtn = document.querySelector('.add-to-cart');
@@ -164,9 +138,10 @@ addToCartBtn.addEventListener('click',()=>{
     localStorage.setItem("cart",JSON.stringify(cart));
     addToCartBtn.textContent="Ajouté ✓";
     setTimeout(()=>{addToCartBtn.textContent="Ajouter au panier";},1200);
-    updateCartDisplay();
+    updateMiniCart();
 });
 </script>
 
 </body>
 </html>
+
