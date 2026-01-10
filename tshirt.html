@@ -29,71 +29,18 @@ h1{font-size:48px;margin-bottom:10px;letter-spacing:2px;}
 .add-to-cart::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);transition:all 0.6s ease;}
 .add-to-cart:hover::after{left:100%;}
 .add-to-cart:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,0.4);}
-#mini-cart{position:fixed;top:100px;right:20px;width:270px;background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.2);padding:12px;z-index:200;font-size:14px;}
-.mini-cart-header{font-weight:bold;margin-bottom:10px;text-align:center;}
-#mini-cart-items{max-height:250px;overflow-y:auto;margin-bottom:10px;}
+#mini-cart-dropdown{position:fixed;top:100px;right:20px;width:270px;z-index:200;font-family:"Helvetica Neue",Arial,sans-serif;}
+#toggle-cart{width:100%;padding:12px;background:linear-gradient(135deg,#111,#333);color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:14px;transition:all 0.3s ease;}
+#toggle-cart:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.4);}
+.cart-content{max-height:0;overflow:hidden;background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.2);margin-top:10px;transition:max-height 0.4s ease,padding 0.3s ease;padding:0 12px;}
+.cart-content.open{max-height:300px;padding:12px;}
 .mini-cart-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.1);}
 .mini-cart-item:last-child{border-bottom:none;}
-.remove-item{cursor:pointer;padding:4px 8px;background:linear-gradient(135deg,#111,#333);color:#fff;border-radius:20px;transition:all 0.3s ease;user-select:none;}
+.remove-item{cursor:pointer;padding:2px 6px;background:linear-gradient(135deg,#111,#333);color:#fff;border-radius:10px;font-weight:bold;transition:all 0.3s ease;}
 .remove-item:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.4);}
-.empty-mini-cart{text-align:center;opacity:0.5;}
-.total-cart{font-weight:bold;text-align:right;font-size:16px;margin-top:5px;}
+.total{font-weight:bold;margin-top:10px;text-align:right;}
 </style>
 </head>
-    <!-- MINI-PANIER DÉROULANT -->
-<div id="mini-cart-dropdown">
-    <button id="toggle-cart">Ouvrir mon panier : 0 €</button>
-    <div id="mini-cart-items" class="cart-content">
-        <p class="empty-mini-cart">Aucun article</p>
-        <div class="total">Total : 0 €</div>
-    </div>
-</div>
-
-<script>
-/* MINI-PANIER DÉROULANT AVEC CROIX ET TOTAL */
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-const miniCartItems = document.getElementById("mini-cart-items");
-const toggleCartBtn = document.getElementById("toggle-cart");
-
-function updateMiniCart() {
-    let total = 0;
-    miniCartItems.innerHTML = "";
-    if(cart.length === 0){
-        miniCartItems.innerHTML = '<p class="empty-mini-cart">Aucun article</p>';
-        miniCartItems.innerHTML += `<div class="total">Total : 0 €</div>`;
-    } else {
-        cart.forEach((item,index) => {
-            total += item.price;
-            const div = document.createElement("div");
-            div.classList.add("mini-cart-item");
-            div.innerHTML = `${item.name} – ${item.size} – ${item.price} € <span class="remove-item">❌</span>`;
-            div.querySelector(".remove-item").addEventListener("click", ()=>{
-                cart.splice(index,1);
-                localStorage.setItem("cart",JSON.stringify(cart));
-                updateMiniCart();
-            });
-            miniCartItems.appendChild(div);
-        });
-        miniCartItems.innerHTML += `<div class="total">Total : ${total} €</div>`;
-    }
-    toggleCartBtn.textContent = `Ouvrir mon panier : ${total} €`;
-}
-
-/* Bouton pour ouvrir/fermer le mini-panier */
-toggleCartBtn.addEventListener("click", () => {
-    miniCartItems.classList.toggle("open");
-    if(miniCartItems.classList.contains("open")){
-        toggleCartBtn.textContent = "Fermer le panier";
-    } else {
-        let total = cart.reduce((sum,item)=>sum+item.price,0);
-        toggleCartBtn.textContent = `Ouvrir mon panier : ${total} €`;
-    }
-});
-
-// Initialisation
-updateMiniCart();
-</script>
-
 <body>
 
 <div class="navbar">
@@ -108,15 +55,13 @@ updateMiniCart();
             </div>
         </div>
     </div>
-    <div class="nav-right">
-        <a href="Panier.html">Panier</a>
-    </div>
+    <div class="nav-right"><a href="Panier.html">Panier</a></div>
 </div>
 
 <div class="content">
     <h1>T-shirt SILENCE</h1>
     <div class="price">35 €</div>
-    <div class="product-image"><img src="images/T-shirtClintEastwood.jpg" alt="T-shirt SILENCE Clint Eastwood"></div>
+    <div class="product-image"><img src="images/T-shirtClintEastwood.jpg" alt="T-shirt SILENCE"></div>
     <div class="description">Conçu pour ceux qui avancent sans bruit.<br>Coupe droite, tissu premium, présence discrète.</div>
     <div class="sizes">
         <span>XS</span><span>S</span><span>M</span><span>L</span><span>XL</span>
@@ -124,10 +69,13 @@ updateMiniCart();
     <button class="add-to-cart">Ajouter au panier</button>
 </div>
 
-<div id="mini-cart">
-    <div class="mini-cart-header">🛒 Panier (<span id="mini-cart-count">0</span>)</div>
-    <div id="mini-cart-items"><p class="empty-mini-cart">Aucun article</p></div>
-    <div class="total-cart">Total : <span id="cart-total">0</span> €</div>
+<!-- MINI-PANIER DÉROULANT -->
+<div id="mini-cart-dropdown">
+    <button id="toggle-cart">Ouvrir mon panier : 0 €</button>
+    <div id="mini-cart-items" class="cart-content">
+        <p class="empty-mini-cart">Aucun article</p>
+        <div class="total">Total : 0 €</div>
+    </div>
 </div>
 
 <script>
@@ -140,57 +88,51 @@ document.addEventListener('click',e=>{if(!dropdown.contains(e.target)) dropdown.
 // Taille
 const sizes = document.querySelectorAll('.sizes span');
 let selectedSize = null;
-sizes.forEach(size => {
-    size.addEventListener('click', () => {
-        sizes.forEach(s=>s.classList.remove('active'));
-        size.classList.add('active');
-        selectedSize = size.textContent;
-    });
-});
+sizes.forEach(size=>{size.addEventListener('click',()=>{sizes.forEach(s=>s.classList.remove('active'));size.classList.add('active');selectedSize=size.textContent;});});
 
-// Mini-panier
-const addToCartBtn = document.querySelector('.add-to-cart');
-const miniCartCount = document.getElementById("mini-cart-count");
-const miniCartItems = document.getElementById("mini-cart-items");
-const cartTotalElem = document.getElementById("cart-total");
+// Mini-panier déroulant
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const miniCartItemsDropdown = document.getElementById("mini-cart-items");
+const toggleCartBtn = document.getElementById("toggle-cart");
 
-function updateMiniCart(){
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    miniCartCount.textContent = cart.length;
-    miniCartItems.innerHTML = "";
-    let total = 0;
-    if(cart.length===0){miniCartItems.innerHTML='<p class="empty-mini-cart">Aucun article</p>';}
+function updateMiniCartDropdown(){
+    let total=0;
+    miniCartItemsDropdown.innerHTML="";
+    if(cart.length===0){miniCartItemsDropdown.innerHTML='<p class="empty-mini-cart">Aucun article</p><div class="total">Total : 0 €</div>';}
     else{
         cart.forEach((item,index)=>{
-            total += item.price;
-            const div = document.createElement("div");
+            total+=item.price;
+            const div=document.createElement("div");
             div.classList.add("mini-cart-item");
-            div.textContent = `${item.name} – ${item.size} – ${item.price} €`;
-            const remove = document.createElement("span");
-            remove.classList.add("remove-item");
-            remove.textContent = "❌";
-            remove.addEventListener("click", ()=>{
+            div.innerHTML=`${item.name} – ${item.size} – ${item.price} € <span class="remove-item">❌</span>`;
+            div.querySelector(".remove-item").addEventListener("click",()=>{
                 cart.splice(index,1);
                 localStorage.setItem("cart",JSON.stringify(cart));
-                updateMiniCart();
+                updateMiniCartDropdown();
             });
-            div.appendChild(remove);
-            miniCartItems.appendChild(div);
+            miniCartItemsDropdown.appendChild(div);
         });
+        miniCartItemsDropdown.innerHTML+=`<div class="total">Total : ${total} €</div>`;
     }
-    cartTotalElem.textContent = total;
+    toggleCartBtn.textContent=`Ouvrir mon panier : ${total} €`;
 }
-updateMiniCart();
 
-addToCartBtn.addEventListener('click', ()=>{
+toggleCartBtn.addEventListener("click",()=>{
+    miniCartItemsDropdown.classList.toggle("open");
+    if(miniCartItemsDropdown.classList.contains("open")) toggleCartBtn.textContent="Fermer le panier";
+    else toggleCartBtn.textContent=`Ouvrir mon panier : ${cart.reduce((sum,item)=>sum+item.price,0)} €`;
+});
+updateMiniCartDropdown();
+
+// Ajouter au panier
+const addToCartBtn=document.querySelector('.add-to-cart');
+addToCartBtn.addEventListener('click',()=>{
     if(!selectedSize){alert("Veuillez sélectionner une taille avant d'ajouter au panier."); return;}
-    const product = {name:"T-shirt SILENCE", size:selectedSize, price:35};
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.push(product);
+    cart.push({name:"T-shirt SILENCE", size:selectedSize, price:35});
     localStorage.setItem("cart",JSON.stringify(cart));
-    addToCartBtn.textContent = "Ajouté ✓";
+    addToCartBtn.textContent="Ajouté ✓";
     setTimeout(()=>{addToCartBtn.textContent="Ajouter au panier";},1200);
-    updateMiniCart();
+    updateMiniCartDropdown();
 });
 </script>
 
