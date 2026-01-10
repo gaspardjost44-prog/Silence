@@ -42,7 +42,6 @@ h1{font-size:48px;margin-bottom:10px;letter-spacing:2px;}
 </head>
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
     <div class="nav-left">
         <a href="index.html" class="logo">SILENCE</a>
@@ -60,28 +59,17 @@ h1{font-size:48px;margin-bottom:10px;letter-spacing:2px;}
     </div>
 </div>
 
-<!-- CONTENU -->
 <div class="content">
     <h1>T-shirt SILENCE</h1>
     <div class="price">35 €</div>
-    <div class="product-image">
-        <img src="images/T-shirtClintEastwood.jpg" alt="T-shirt SILENCE Clint Eastwood">
-    </div>
-    <div class="description">
-        Conçu pour ceux qui avancent sans bruit.<br>
-        Coupe droite, tissu premium, présence discrète.
-    </div>
+    <div class="product-image"><img src="images/T-shirtClintEastwood.jpg" alt="T-shirt SILENCE Clint Eastwood"></div>
+    <div class="description">Conçu pour ceux qui avancent sans bruit.<br>Coupe droite, tissu premium, présence discrète.</div>
     <div class="sizes">
-        <span>XS</span>
-        <span>S</span>
-        <span>M</span>
-        <span>L</span>
-        <span>XL</span>
+        <span>XS</span><span>S</span><span>M</span><span>L</span><span>XL</span>
     </div>
     <button class="add-to-cart">Ajouter au panier</button>
 </div>
 
-<!-- MINI-PANIER -->
 <div id="mini-cart">
     <div class="mini-cart-header">🛒 Panier (<span id="mini-cart-count">0</span>)</div>
     <div id="mini-cart-items"><p class="empty-mini-cart">Aucun article</p></div>
@@ -117,7 +105,6 @@ function updateMiniCart(){
     miniCartCount.textContent = cart.length;
     miniCartItems.innerHTML = "";
     let total = 0;
-
     if(cart.length===0){miniCartItems.innerHTML='<p class="empty-mini-cart">Aucun article</p>';}
     else{
         cart.forEach((item,index)=>{
@@ -141,7 +128,6 @@ function updateMiniCart(){
 }
 updateMiniCart();
 
-// Ajouter au panier
 addToCartBtn.addEventListener('click', ()=>{
     if(!selectedSize){alert("Veuillez sélectionner une taille avant d'ajouter au panier."); return;}
     const product = {name:"T-shirt SILENCE", size:selectedSize, price:35};
