@@ -4,143 +4,34 @@
 <meta charset="UTF-8">
 <title>SILENCE – Accueil</title>
 <style>
-body {
-    margin: 0;
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    background: #f5f5f5;
-    color: #111;
-}
-
-/* NAVBAR */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #ffffffcc;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    z-index: 100;
-    box-sizing: border-box;
-}
-
-.nav-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.logo {
-    font-size: 22px;
-    text-decoration: none;
-    color: #111;
-    letter-spacing: 3px;
-}
-
-.nav-right a {
-    text-decoration: none;
-    color: #111;
-    font-weight: bold;
-    font-size: 16px;
-    flex-shrink: 0;
-}
-
-/* DROPDOWN */
-.dropdown {
-    position: relative;
-}
-
-.dropdown-button {
-    cursor: pointer;
-    padding: 8px 20px;
-    font-size: 16px;
-    letter-spacing: 1px;
-    background: none;
-    border: none;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #fff;
-    border-radius: 12px;
-    padding: 8px 0;
-    min-width: 160px;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    z-index: 150;
-}
-
-.dropdown-menu a {
-    display: block;
-    padding: 10px 20px;
-    color: #111;
-    text-decoration: none;
-}
-
-.dropdown-menu a:hover {
-    background: rgba(0,0,0,0.05);
-}
-
-.dropdown.active .dropdown-menu {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(5px);
-}
-
-/* CONTENU */
-.content {
-    padding-top: 140px;
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-/* MINI-PANIER */
-#mini-cart {
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    width: 250px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    padding: 12px;
-    z-index: 200;
-    font-size: 14px;
-}
-
-.mini-cart-header {
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-#mini-cart-items {
-    max-height: 250px;
-    overflow-y: auto;
-}
-
-.mini-cart-item {
-    padding: 6px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-
-.mini-cart-item:last-child {
-    border-bottom: none;
-}
-
-.empty-mini-cart {
-    text-align: center;
-    opacity: 0.5;
-}
+body {margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#f5f5f5;color:#111;}
+.navbar{position:fixed;top:0;left:0;width:100%;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;background:#ffffffcc;backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(0,0,0,0.1);z-index:100;box-sizing:border-box;}
+.nav-left{display:flex;align-items:center;gap:20px;}
+.logo{font-size:22px;text-decoration:none;color:#111;letter-spacing:3px;}
+.nav-right a{text-decoration:none;color:#111;font-weight:bold;font-size:16px;flex-shrink:0;}
+.dropdown{position:relative;}
+.dropdown-button{cursor:pointer;padding:8px 20px;font-size:16px;letter-spacing:1px;background:none;border:none;}
+.dropdown-menu{position:absolute;top:100%;left:0;background:#fff;border-radius:12px;padding:8px 0;min-width:160px;opacity:0;pointer-events:none;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(0,0,0,0.2);z-index:150;}
+.dropdown-menu a{display:block;padding:10px 20px;color:#111;text-decoration:none;}
+.dropdown-menu a:hover{background:rgba(0,0,0,0.05);}
+.dropdown.active .dropdown-menu{opacity:1;pointer-events:auto;transform:translateY(5px);}
+.content{padding-top:140px;max-width:900px;margin:0 auto;text-align:center;}
+.hero-image img{width:100%;max-width:700px;border-radius:16px;box-shadow:0 8px 22px rgba(0,0,0,0.25);transition:transform 0.4s ease,box-shadow 0.4s ease;margin-bottom:30px;}
+.hero-image img:hover{transform:scale(1.02);box-shadow:0 12px 30px rgba(0,0,0,0.3);}
+#mini-cart{position:fixed;top:100px;right:20px;width:250px;background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.2);padding:12px;z-index:200;font-size:14px;}
+.mini-cart-header{font-weight:bold;margin-bottom:10px;text-align:center;}
+#mini-cart-items{max-height:250px;overflow-y:auto;}
+.mini-cart-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.1);}
+.mini-cart-item:last-child{border-bottom:none;}
+.remove-item{cursor:pointer;padding:4px 8px;background:linear-gradient(135deg,#111,#333);color:#fff;border-radius:20px;transition:all 0.3s ease;user-select:none;}
+.remove-item:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.4);}
+.empty-mini-cart{text-align:center;opacity:0.5;}
+h1{font-size:48px;margin-bottom:20px;letter-spacing:2px;}
+p{font-size:18px;line-height:1.6;margin-bottom:30px;}
+.button-link{padding:16px 50px;background:linear-gradient(135deg,#111,#333);color:#fff;border-radius:40px;border:none;font-size:16px;letter-spacing:2px;cursor:pointer;transition:all 0.3s ease;position:relative;overflow:hidden;text-decoration:none;display:inline-block;}
+.button-link::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);transition:all 0.6s ease;}
+.button-link:hover::after{left:100%;}
+.button-link:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,0.4);}
 </style>
 </head>
 <body>
@@ -163,44 +54,55 @@ body {
     </div>
 </div>
 
+<!-- CONTENU -->
 <div class="content">
     <h1>Bienvenue chez SILENCE</h1>
-    <p>Découvrez nos vêtements discrets et premium. T-shirt, Pull, Jogging… à votre style.</p>
+    <p>Découvrez notre collection premium : T-shirts, Pulls et Joggings pour avancer discrètement avec style.</p>
+    <div class="hero-image">
+        <img src="images/HeroExample.jpg" alt="Collection SILENCE">
+    </div>
+    <a href="tshirt.html" class="button-link">Découvrir les produits</a>
 </div>
 
 <!-- MINI-PANIER -->
 <div id="mini-cart">
     <div class="mini-cart-header">🛒 Panier (<span id="mini-cart-count">0</span>)</div>
-    <div id="mini-cart-items">
-        <p class="empty-mini-cart">Aucun article</p>
-    </div>
+    <div id="mini-cart-items"><p class="empty-mini-cart">Aucun article</p></div>
 </div>
 
 <script>
-/* DROPDOWN */
-const dropdown = document.querySelector('.dropdown');
+// Dropdown
 const dropdownBtn = document.querySelector('.dropdown-button');
-dropdownBtn.addEventListener('click', () => { dropdown.classList.toggle('active'); });
-document.addEventListener('click', e => { if(!dropdown.contains(e.target)) dropdown.classList.remove('active'); });
+const dropdown = document.querySelector('.dropdown');
+dropdownBtn.addEventListener('click',()=>dropdown.classList.toggle('active'));
+document.addEventListener('click',e=>{if(!dropdown.contains(e.target)) dropdown.classList.remove('active');});
 
-/* MINI-CART */
+// Mini-panier
 const miniCartCount = document.getElementById("mini-cart-count");
 const miniCartItems = document.getElementById("mini-cart-items");
 
-function updateMiniCart() {
+function updateMiniCart(){
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     miniCartCount.textContent = cart.length;
     miniCartItems.innerHTML = "";
-    if(cart.length===0){
-        miniCartItems.innerHTML = '<p class="empty-mini-cart">Aucun article</p>';
-        return;
+    if(cart.length===0){miniCartItems.innerHTML='<p class="empty-mini-cart">Aucun article</p>';}
+    else{
+        cart.forEach((item,index)=>{
+            const div = document.createElement("div");
+            div.classList.add("mini-cart-item");
+            div.textContent = `${item.name} – ${item.size}`;
+            const remove = document.createElement("span");
+            remove.classList.add("remove-item");
+            remove.textContent = "❌";
+            remove.addEventListener("click", ()=>{
+                cart.splice(index,1);
+                localStorage.setItem("cart",JSON.stringify(cart));
+                updateMiniCart();
+            });
+            div.appendChild(remove);
+            miniCartItems.appendChild(div);
+        });
     }
-    cart.forEach(item => {
-        const div = document.createElement("div");
-        div.classList.add("mini-cart-item");
-        div.textContent = `${item.name} – ${item.size}`;
-        miniCartItems.appendChild(div);
-    });
 }
 updateMiniCart();
 </script>
