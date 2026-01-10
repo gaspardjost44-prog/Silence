@@ -260,17 +260,17 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Paiement lancé, panier =", cart);
 
         try {
+            // Appel vers ton backend Railway
             const response = await fetch("https://silence-backend-three.vercel.app/api/create-checkout-session", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ items: cart })
-});
-
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ items: cart })
             });
 
             const data = await response.json();
 
             if(data.url){
+                // Redirection vers Stripe Checkout
                 window.location.href = data.url;
             } else {
                 console.error("Erreur Stripe :", data);
@@ -281,7 +281,11 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Erreur réseau :", error);
             alert("Problème de connexion au serveur");
         }
+
     });
+
+});
+
 
 });
 </script>
