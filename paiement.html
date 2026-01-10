@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SILENCE – Paiement</title>
+<style>
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background: #f5f5f5;
+    color: #111;
+    margin: 0;
+    padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffffcc;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.nav-left { display: flex; align-items: center; gap: 20px; }
+.logo { font-size: 22px; text-decoration: none; color: #111; letter-spacing: 3px; }
+.nav-right a { text-decoration: none; color: #111; font-weight: bold; font-size: 16px; }
+
+/* DROPDOWN */
+.dropdown { position: relative; }
+.dropdown-button {
+    cursor: pointer;
+    padding: 8px 20px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    background: none;
+    border: none;
+}
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border-radius: 12px;
+    padding: 8px 0;
+    min-width: 160px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 150;
+}
+.dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: #111;
+    text-decoration: none;
+}
+.dropdown-menu a:hover { background: rgba(0,0,0,0.05); }
+.dropdown.active .dropdown-menu { opacity:1; pointer-events:auto; transform:translateY(5px); }
+
+/* CONTENU */
+.content {
+    padding-top: 140px;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h1 { margin-bottom: 25px; letter-spacing: 1px; font-size:32px; }
+
+/* FORMULAIRE */
+form { display: flex; flex-direction: column; gap: 20px; }
+input {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+input:focus { border-color: #111; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+/* TOTAL & BOUTON */
+.total { font-size: 20px; font-weight: bold; text-align: right; margin-top: 10px; }
+.pay-btn {
+    padding: 14px 50px;
+    background: linear-gradient(135deg,#111,#333);
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 2px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+.pay-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+.empty-cart { opacity:0.5; text-align:center; margin-top:30px; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="nav-left">
+        <a href="index.html" class="logo">SILENCE</a>
+        <div class="dropdown">
+            <button class="dropdown-button">Nos produits</button>
+            <div class="dropdown-menu">
+                <a href="tshirt.html">T-shirt</a>
+                <a href="pull.html">Pull</a>
+                <a href="jogging.html">Jogging</a>
+            </div>
+        </div>
+    </div>
+    <div class="nav-right">
+        <a href="Panier.html">Panier</a>
+    </div>
+</div>
+
+<div class="content">
+    <h1>Paiement</h1>
+
+    <div id="cart-total-display"></div>
+
+    <form id="payment-form">
+        <input type="text" id="name" placeholder="Nom complet" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="text" id="address" placeholder="Adresse" required>
+        <input type="text" id="card" placeholder="Numéro de carte bancaire" required>
+        <div class="total">Total : <span id="cart-total">0</span> €</div>
+        <button type="submit" class="pay-btn">Payer maintenant</button>
+    </form>
+
+    <p class="empty-cart">Votre panier est vide</p>
+</div>
+
+<script>
+/* DROPDOWN */
+const dropdownBtn = document.querySelector('.dropdown-button');
+const dropdown = document.querySelector('.dropdown');
+dropdownBtn.addEventListener('click',()=>dropdown.classList.toggle('active'));
+document.addEventListener('click', e => { if(!dropdown.contains(e.target)) dropdown.classList.remove('active'); });
+
+/* PANIER */
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const cartTotalElem = document.getElementById("cart-total");
+const emptyCartMsg = document.querySelector(".empty-cart");
+const cartTotalDisplay = document.getElementById("cart-total-display");
+const form = document.getElementById("payment-form");
+
+function updateTotal(){
+    let total = 0;
+    cart.forEach(item=>total+=item.price);
+    cartTotalElem.textContent = total;
+    if(cart.length===0){
+        emptyCartMsg.style.display="block";
+        form.style.display="none";
+    } else {
+        emptyCartMsg.style.display="none";
+        form.style.display="flex";
+    }
+    cartTotalDisplay.textContent = cart.length>0 ? `Vous allez payer ${total} € pour ${cart.length} article(s)` : '';
+}
+
+updateTotal();
+
+/* FORMULAIRE DE PAIEMENT SIMULÉ */
+form.addEventListener("submit", e=>{
+    e.preventDefault();
+    alert("Paiement effectué avec succès ! Merci pour votre commande.");
+    localStorage.removeItem("cart");
+    updateTotal();
+});
+</script>
+
+</body>
+</html>
