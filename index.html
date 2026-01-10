@@ -88,7 +88,7 @@ body {
 
 /* ================== NAV-RIGHT ================== */
 .nav-right {
-    margin-left: auto; /* pousse le panier complètement à droite */
+    margin-left: auto; /* pousse le lien Panier complètement à droite */
     white-space: nowrap; /* empêche le texte de couper */
 }
 
@@ -134,6 +134,93 @@ h1 {
     opacity: 0.85;
     margin-bottom: 35px;
 }
+
+/* ================== MINI-PANIER DÉROULANT ================== */
+#mini-cart-dropdown {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 270px;
+    z-index: 200;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+#toggle-cart {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg,#111,#333);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+#toggle-cart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.cart-content {
+    max-height: 0;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    margin-top: 10px;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 12px;
+}
+
+.cart-content.open {
+    max-height: 300px;
+    padding: 12px;
+}
+
+.mini-cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom:1px solid rgba(0,0,0,0.1);
+    font-size: 14px;
+}
+
+.mini-cart-item:last-child { border-bottom:none; }
+
+.remove-item {
+    cursor: pointer;
+    padding: 2px 6px;
+    background: linear-gradient(135deg,#111,#333);
+    color: #fff;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.remove-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.total {
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: right;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 700px) {
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 20px;
+    }
+    .nav-right {
+        margin-top: 10px;
+    }
+}
 </style>
 </head>
 <body>
@@ -152,7 +239,7 @@ h1 {
         </div>
     </div>
     <div class="nav-right">
-        <!-- PANIER repositionné correctement -->
+        <!-- PANIER bien aligné à droite -->
         <a href="Panier.html">Panier</a>
     </div>
 </div>
@@ -237,3 +324,4 @@ updateMiniCart();
 
 </body>
 </html>
+
