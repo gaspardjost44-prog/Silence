@@ -19,7 +19,7 @@ body {
     width: 100%;
     padding: 15px 30px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* logo + nav gauche / panier à droite */
     align-items: center;
     background: #ffffffcc;
     backdrop-filter: blur(8px);
@@ -29,7 +29,8 @@ body {
 
 .nav-left { display: flex; align-items: center; gap: 20px; }
 .logo { font-size: 22px; text-decoration: none; color: #111; letter-spacing: 3px; }
-.nav-right a { text-decoration: none; color: #111; font-weight: bold; font-size: 16px; }
+.nav-right { display: flex; align-items: center; }
+.nav-right a { text-decoration: none; color: #111; font-weight: bold; font-size: 16px; margin-left: 25px; }
 
 /* DROPDOWN */
 .dropdown { position: relative; }
@@ -186,3 +187,4 @@ form.addEventListener("submit", e=>{
 
 </body>
 </html>
+
