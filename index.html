@@ -2,59 +2,69 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>SILENCE</title>
-
+<title>SILENCE – Accueil</title>
 <style>
 body {
     margin: 0;
-    padding: 0;
     font-family: "Helvetica Neue", Arial, sans-serif;
-    background: #f5f5f5; /* fond clair */
-    color: #111; /* texte noir */
-    min-height: 100vh;
+    background: #f5f5f5;
+    color: #111;
 }
 
-/* NAVBAR FIXE */
+/* NAVBAR */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 20px 20px;
+    padding: 20px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #ffffffcc; /* blanc semi-transparent */
+    background: #ffffffcc;
+    backdrop-filter: blur(8px);
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     z-index: 100;
 }
 
-.logo {
-    font-size: 22px;
-    letter-spacing: 3px;
-    text-decoration: none;
-    color: #111;
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 25px;
 }
 
-/* MENU DROPDOWN */
+.logo {
+    font-size: 22px;
+    text-decoration: none;
+    color: #111;
+    letter-spacing: 3px;
+}
+
+.nav-right a {
+    text-decoration: none;
+    color: #111;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* DROPDOWN */
 .dropdown {
     position: relative;
 }
 
 .dropdown-button {
     cursor: pointer;
-    letter-spacing: 1px;
     padding: 8px 20px;
-    white-space: nowrap;
     font-size: 16px;
-    color: #111;
+    letter-spacing: 1px;
+    background: none;
+    border: none;
 }
 
 .dropdown-menu {
     position: absolute;
-    top: 120%;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 100%;
+    left: 0;
     background: #fff;
     border-radius: 12px;
     padding: 8px 0;
@@ -63,8 +73,7 @@ body {
     pointer-events: none;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    z-index: 10;
-    white-space: nowrap;
+    z-index: 150;
 }
 
 .dropdown-menu a {
@@ -81,65 +90,123 @@ body {
 .dropdown.active .dropdown-menu {
     opacity: 1;
     pointer-events: auto;
-    transform: translateX(-50%) translateY(5px);
+    transform: translateY(5px);
 }
 
-/* CONTENU ACCUEIL */
-.hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+/* CONTENU */
+.content {
+    padding-top: 140px;
+    max-width: 900px;
+    margin: 0 auto;
     text-align: center;
 }
 
-.hero h1 {
-    font-size: 70px;
-    letter-spacing: 6px;
-    margin-bottom: 10px;
+/* MINI-PANIER */
+#mini-cart {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 250px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    padding: 12px;
+    z-index: 200;
+    font-size: 14px;
 }
 
-.hero p {
-    font-size: 22px;
-    opacity: 0.8;
-    letter-spacing: 2px;
+.mini-cart-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#mini-cart-items {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.mini-cart-item {
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.mini-cart-item:last-child {
+    border-bottom: none;
+}
+
+.empty-mini-cart {
+    text-align: center;
+    opacity: 0.5;
 }
 </style>
 </head>
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
-    <a href="index.html" class="logo">SILENCE</a>
-
-    <div class="dropdown">
-        <div class="dropdown-button">Nos produits</div>
-        <div class="dropdown-menu">
-            <a href="tshirt.html">T-shirt</a>
-            <a href="pull.html">Pull</a>
-            <a href="jogging.html">Jogging</a>
+    <div class="nav-left">
+        <a href="index.html" class="logo">SILENCE</a>
+        <div class="dropdown">
+            <button class="dropdown-button">Nos produits</button>
+            <div class="dropdown-menu">
+                <a href="tshirt.html">T-shirt</a>
+                <a href="pull.html">Pull</a>
+                <a href="jogging.html">Jogging</a>
+            </div>
         </div>
+    </div>
+    <div class="nav-right">
+        <a href="Panier.html">Panier</a>
     </div>
 </div>
 
-<div class="hero">
-    <h1>SILENCE</h1>
-    <p>Minimal. Calme. Essentiel.</p>
+<div class="content">
+    <h1>Bienvenue chez SILENCE</h1>
+    <p>Découvrez nos vêtements discrets et premium. T-shirt, Pull, Jogging… à votre style.</p>
+</div>
+
+<!-- MINI-PANIER -->
+<div id="mini-cart">
+    <div class="mini-cart-header">🛒 Panier (<span id="mini-cart-count">0</span>)</div>
+    <div id="mini-cart-items">
+        <p class="empty-mini-cart">Aucun article</p>
+    </div>
 </div>
 
 <script>
+/* DROPDOWN */
 const dropdown = document.querySelector('.dropdown');
-const button = document.querySelector('.dropdown-button');
+const dropdownBtn = document.querySelector('.dropdown-button');
 
-button.addEventListener('click', () => {
+dropdownBtn.addEventListener('click', () => {
     dropdown.classList.toggle('active');
 });
 
-document.addEventListener('click', (e) => {
-    if (!dropdown.contains(e.target)) {
-        dropdown.classList.remove('active');
-    }
+document.addEventListener('click', e => {
+    if (!dropdown.contains(e.target)) dropdown.classList.remove('active');
 });
+
+/* MINI-CART */
+const miniCartCount = document.getElementById("mini-cart-count");
+const miniCartItems = document.getElementById("mini-cart-items");
+
+function updateMiniCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    miniCartCount.textContent = cart.length;
+    miniCartItems.innerHTML = "";
+    if(cart.length === 0){
+        miniCartItems.innerHTML = '<p class="empty-mini-cart">Aucun article</p>';
+        return;
+    }
+    cart.forEach(item => {
+        const div = document.createElement("div");
+        div.classList.add("mini-cart-item");
+        div.textContent = `${item.name} – ${item.size}`;
+        miniCartItems.appendChild(div);
+    });
+}
+updateMiniCart();
 </script>
 
 </body>
