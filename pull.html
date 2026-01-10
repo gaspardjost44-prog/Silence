@@ -2,9 +2,9 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>SILENCE –Pull </title>
+<title>SILENCE – Pull</title>
 <style>
-body {margin:0; font-family:"Helvetica Neue",Arial,sans-serif; background:#f5f5f5; color:#111;}
+body {margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#f5f5f5;color:#111;}
 .navbar{position:fixed;top:0;left:0;width:100%;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;background:#ffffffcc;backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(0,0,0,0.1);z-index:100;box-sizing:border-box;}
 .nav-left{display:flex;align-items:center;gap:20px;}
 .logo{font-size:22px;text-decoration:none;color:#111;letter-spacing:3px;}
@@ -16,7 +16,7 @@ body {margin:0; font-family:"Helvetica Neue",Arial,sans-serif; background:#f5f5f
 .dropdown-menu a:hover{background:rgba(0,0,0,0.05);}
 .dropdown.active .dropdown-menu{opacity:1;pointer-events:auto;transform:translateY(5px);}
 .content{padding-top:140px;max-width:900px;margin:0 auto;text-align:center;}
-.product-image img{width:100%;max-width:420px;border-radius:16px;box-shadow:0 8px 22px rgba(0,0,0,0.25);transition:transform 0.4s ease, box-shadow 0.4s ease;margin-bottom:30px;}
+.product-image img{width:100%;max-width:420px;border-radius:16px;box-shadow:0 8px 22px rgba(0,0,0,0.25);transition:transform 0.4s ease,box-shadow 0.4s ease;margin-bottom:30px;}
 .product-image img:hover{transform:scale(1.05);box-shadow:0 16px 40px rgba(0,0,0,0.4);}
 .sizes span{display:inline-block;margin:0 6px 12px;padding:10px 18px;border:1px solid #111;border-radius:25px;cursor:pointer;transition:all 0.25s ease;user-select:none;}
 .sizes span:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,0.2);}
@@ -31,10 +31,12 @@ body {margin:0; font-family:"Helvetica Neue",Arial,sans-serif; background:#f5f5f
 .mini-cart-item{padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.1);}
 .mini-cart-item:last-child{border-bottom:none;}
 .empty-mini-cart{text-align:center;opacity:0.5;}
+.price{font-size:26px;margin-bottom:20px;font-weight:500;}
 </style>
 </head>
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
     <div class="nav-left">
         <a href="index.html" class="logo">SILENCE</a>
@@ -52,14 +54,15 @@ body {margin:0; font-family:"Helvetica Neue",Arial,sans-serif; background:#f5f5f
     </div>
 </div>
 
+<!-- CONTENU -->
 <div class="content">
     <h1>Pull SILENCE</h1>
-    <div class="price">35 €</div>
+    <div class="price">50 €</div>
     <div class="product-image">
-        <img src="images/T-shirtClintEastwood.jpg" alt="T-shirt SILENCE">
+        <img src="images/PullExample.jpg" alt="Pull SILENCE">
     </div>
     <div class="description">
-        Conçu pour ceux qui avancent sans bruit. Coupe droite, tissu premium, présence discrète.
+        Pull premium confortable et discret, idéal pour rester silencieux tout en style.
     </div>
     <div class="sizes">
         <span>XS</span><span>S</span><span>M</span><span>L</span><span>XL</span>
@@ -67,6 +70,7 @@ body {margin:0; font-family:"Helvetica Neue",Arial,sans-serif; background:#f5f5f
     <button class="add-to-cart">Ajouter au panier</button>
 </div>
 
+<!-- MINI-PANIER -->
 <div id="mini-cart">
     <div class="mini-cart-header">🛒 Panier (<span id="mini-cart-count">0</span>)</div>
     <div id="mini-cart-items"><p class="empty-mini-cart">Aucun article</p></div>
@@ -111,7 +115,7 @@ updateMiniCart();
 const addToCartBtn = document.querySelector('.add-to-cart');
 addToCartBtn.addEventListener('click',()=>{
     if(!selectedSize){alert("Veuillez sélectionner une taille !"); return;}
-    const product={name:"T-shirt SILENCE",size:selectedSize};
+    const product={name:"Pull SILENCE",size:selectedSize};
     let cart=JSON.parse(localStorage.getItem("cart"))||[];
     cart.push(product);
     localStorage.setItem("cart",JSON.stringify(cart));
