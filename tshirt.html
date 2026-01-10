@@ -13,13 +13,13 @@ body {
     color: #111;
 }
 
-/* ================= NAVBAR ================= */
+/* NAVBAR */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 20px 20px;
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,7 +36,13 @@ body {
     color: #111;
 }
 
-/* ================= DROPDOWN ================= */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* DROPDOWN */
 .dropdown {
     position: relative;
 }
@@ -81,7 +87,7 @@ body {
     transform: translateX(-50%) translateY(5px);
 }
 
-/* ================= CONTENU ================= */
+/* CONTENU */
 .content {
     padding-top: 120px;
     max-width: 900px;
@@ -103,7 +109,7 @@ h1 {
     font-weight: 500;
 }
 
-/* ================= IMAGE PREMIUM ================= */
+/* IMAGE PREMIUM */
 .product-image {
     max-width: 420px;
     margin: 0 auto 30px;
@@ -121,7 +127,7 @@ h1 {
     box-shadow: 0 16px 40px rgba(0,0,0,0.4);
 }
 
-/* ================= DESCRIPTION ================= */
+/* DESCRIPTION */
 .description {
     font-size: 18px;
     line-height: 1.6;
@@ -129,7 +135,7 @@ h1 {
     margin-bottom: 35px;
 }
 
-/* ================= TAILLES ================= */
+/* TAILLES */
 .sizes {
     margin-bottom: 40px;
 }
@@ -156,7 +162,7 @@ h1 {
     box-shadow: 0 4px 14px rgba(0,0,0,0.4);
 }
 
-/* ================= BOUTON PANIER LUXE ================= */
+/* BOUTON PANIER PREMIUM */
 .add-to-cart {
     padding: 16px 50px;
     background: linear-gradient(135deg, #111, #333);
@@ -194,21 +200,23 @@ h1 {
 </head>
 <body>
 
-<!-- ================= NAVBAR ================= -->
+<!-- NAVBAR -->
 <div class="navbar">
     <a href="index.html" class="logo">SILENCE</a>
-
-    <div class="dropdown">
-        <div class="dropdown-button">Nos produits</div>
-        <div class="dropdown-menu">
-            <a href="tshirt.html">T-shirt</a>
-            <a href="pull.html">Pull</a>
-            <a href="jogging.html">Jogging</a>
+    <div class="nav-right">
+        <div class="dropdown">
+            <div class="dropdown-button">Nos produits</div>
+            <div class="dropdown-menu">
+                <a href="tshirt.html">T-shirt</a>
+                <a href="pull.html">Pull</a>
+                <a href="jogging.html">Jogging</a>
+            </div>
         </div>
+        <a href="Panier.html" style="text-decoration:none;color:#111;">Panier</a>
     </div>
 </div>
 
-<!-- ================= CONTENU ================= -->
+<!-- CONTENU -->
 <div class="content">
     <h1>T-shirt SILENCE</h1>
     <div class="price">35 €</div>
@@ -234,7 +242,7 @@ h1 {
     <button class="add-to-cart">Ajouter au panier</button>
 </div>
 
-<!-- ================= JS ================= -->
+<!-- JS -->
 <script>
 /* DROPDOWN */
 const dropdown = document.querySelector('.dropdown');
@@ -250,10 +258,8 @@ document.addEventListener('click', (e) => {
     }
 });
 
-/* TAILLES + PANIER */
+/* TAILLES */
 const sizes = document.querySelectorAll('.sizes span');
-const addToCartBtn = document.querySelector('.add-to-cart');
-
 let selectedSize = null;
 
 sizes.forEach(size => {
@@ -264,17 +270,28 @@ sizes.forEach(size => {
     });
 });
 
+/* PANIER GLOBAL (localStorage) */
+const addToCartBtn = document.querySelector('.add-to-cart');
+
 addToCartBtn.addEventListener('click', () => {
     if (!selectedSize) {
         alert("Veuillez sélectionner une taille avant d'ajouter au panier.");
-    } else {
-        addToCartBtn.textContent = "Ajouté ✓";
-        addToCartBtn.style.background = "linear-gradient(135deg, #000, #111)";
-        setTimeout(() => {
-            addToCartBtn.textContent = "Ajouter au panier";
-            addToCartBtn.style.background = "linear-gradient(135deg, #111, #333)";
-        }, 1500);
+        return;
     }
+
+    const product = {
+        name: "T-shirt SILENCE",
+        size: selectedSize
+    };
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push(product);
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    addToCartBtn.textContent = "Ajouté ✓";
+    setTimeout(() => {
+        addToCartBtn.textContent = "Ajouter au panier";
+    }, 1200);
 });
 </script>
 
