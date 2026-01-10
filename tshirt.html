@@ -13,7 +13,7 @@ body {
     color: #111;
 }
 
-/* NAVBAR */
+/* ================= NAVBAR ================= */
 .navbar {
     position: fixed;
     top: 0;
@@ -36,7 +36,7 @@ body {
     color: #111;
 }
 
-/* DROPDOWN */
+/* ================= DROPDOWN ================= */
 .dropdown {
     position: relative;
 }
@@ -81,7 +81,7 @@ body {
     transform: translateX(-50%) translateY(5px);
 }
 
-/* CONTENU */
+/* ================= CONTENU ================= */
 .content {
     padding-top: 120px;
     max-width: 900px;
@@ -103,77 +103,98 @@ h1 {
     font-weight: 500;
 }
 
-/* IMAGE */
+/* ================= IMAGE PREMIUM ================= */
 .product-image {
     max-width: 420px;
-    margin: 0 auto 25px;
+    margin: 0 auto 30px;
 }
 
 .product-image img {
     width: 100%;
-    border-radius: 14px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
+    border-radius: 16px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .product-image img:hover {
-    transform: scale(1.03);
+    transform: scale(1.05);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4);
 }
 
-/* DESCRIPTION */
+/* ================= DESCRIPTION ================= */
 .description {
     font-size: 18px;
     line-height: 1.6;
     opacity: 0.85;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
-/* TAILLES */
+/* ================= TAILLES ================= */
 .sizes {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .sizes span {
     display: inline-block;
-    margin: 0 6px 10px;
-    padding: 10px 16px;
+    margin: 0 6px 12px;
+    padding: 10px 18px;
     border: 1px solid #111;
-    border-radius: 20px;
+    border-radius: 25px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
+    user-select: none;
 }
 
 .sizes span:hover {
-    background: #111;
-    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .sizes span.active {
     background: #111;
     color: #fff;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
 }
 
-/* BOUTON PANIER */
+/* ================= BOUTON PANIER LUXE ================= */
 .add-to-cart {
-    padding: 14px 40px;
-    background: #111;
+    padding: 16px 50px;
+    background: linear-gradient(135deg, #111, #333);
     color: #fff;
-    border-radius: 30px;
+    border-radius: 40px;
     border: none;
     font-size: 16px;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.add-to-cart::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: all 0.6s ease;
+}
+
+.add-to-cart:hover::after {
+    left: 100%;
 }
 
 .add-to-cart:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 </style>
 </head>
 <body>
 
+<!-- ================= NAVBAR ================= -->
 <div class="navbar">
     <a href="index.html" class="logo">SILENCE</a>
 
@@ -187,6 +208,7 @@ h1 {
     </div>
 </div>
 
+<!-- ================= CONTENU ================= -->
 <div class="content">
     <h1>T-shirt SILENCE</h1>
     <div class="price">35 €</div>
@@ -212,12 +234,13 @@ h1 {
     <button class="add-to-cart">Ajouter au panier</button>
 </div>
 
+<!-- ================= JS ================= -->
 <script>
 /* DROPDOWN */
 const dropdown = document.querySelector('.dropdown');
-const button = document.querySelector('.dropdown-button');
+const dropdownBtn = document.querySelector('.dropdown-button');
 
-button.addEventListener('click', () => {
+dropdownBtn.addEventListener('click', () => {
     dropdown.classList.toggle('active');
 });
 
@@ -227,7 +250,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
-/* TAILLES ACTIVES + PANIER */
+/* TAILLES + PANIER */
 const sizes = document.querySelectorAll('.sizes span');
 const addToCartBtn = document.querySelector('.add-to-cart');
 
@@ -245,10 +268,16 @@ addToCartBtn.addEventListener('click', () => {
     if (!selectedSize) {
         alert("Veuillez sélectionner une taille avant d'ajouter au panier.");
     } else {
-        alert("T-shirt SILENCE – taille " + selectedSize + " ajouté au panier 🖤");
+        addToCartBtn.textContent = "Ajouté ✓";
+        addToCartBtn.style.background = "linear-gradient(135deg, #000, #111)";
+        setTimeout(() => {
+            addToCartBtn.textContent = "Ajouter au panier";
+            addToCartBtn.style.background = "linear-gradient(135deg, #111, #333)";
+        }, 1500);
     }
 });
 </script>
 
 </body>
 </html>
+
