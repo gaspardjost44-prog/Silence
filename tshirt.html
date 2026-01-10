@@ -196,6 +196,45 @@ h1 {
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
+
+/* MINI-PANIER FLOTTANT */
+#mini-cart {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 250px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    padding: 12px;
+    z-index: 200;
+    font-size: 14px;
+}
+
+.mini-cart-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#mini-cart-items {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.mini-cart-item {
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.mini-cart-item:last-child {
+    border-bottom: none;
+}
+
+.empty-mini-cart {
+    text-align: center;
+    opacity: 0.5;
+}
 </style>
 </head>
 <body>
@@ -242,6 +281,14 @@ h1 {
     <button class="add-to-cart">Ajouter au panier</button>
 </div>
 
+<!-- MINI-PANIER -->
+<div id="mini-cart">
+    <div class="mini-cart-header">🛒 Panier (<span id="mini-cart-count">0</span>)</div>
+    <div id="mini-cart-items">
+        <p class="empty-mini-cart">Aucun article</p>
+    </div>
+</div>
+
 <!-- JS -->
 <script>
 /* DROPDOWN */
@@ -270,20 +317,41 @@ sizes.forEach(size => {
     });
 });
 
-/* PANIER GLOBAL (localStorage) */
+/* PANIER GLOBAL + MINI-CART */
 const addToCartBtn = document.querySelector('.add-to-cart');
+const miniCartCount = document.getElementById("mini-cart-count");
+const miniCartItems = document.getElementById("mini-cart-items");
 
+// fonction pour mettre à jour mini-cart
+function updateMiniCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    miniCartCount.textContent = cart.length;
+    miniCartItems.innerHTML = "";
+
+    if(cart.length === 0) {
+        miniCartItems.innerHTML = '<p class="empty-mini-cart">Aucun article</p>';
+        return;
+    }
+
+    cart.forEach(item => {
+        const div = document.createElement("div");
+        div.classList.add("mini-cart-item");
+        div.textContent = `${item.name} – ${item.size}`;
+        miniCartItems.appendChild(div);
+    });
+}
+
+// initialisation
+updateMiniCart();
+
+// Ajout au panier
 addToCartBtn.addEventListener('click', () => {
     if (!selectedSize) {
         alert("Veuillez sélectionner une taille avant d'ajouter au panier.");
         return;
     }
 
-    const product = {
-        name: "T-shirt SILENCE",
-        size: selectedSize
-    };
-
+    const product = { name: "T-shirt SILENCE", size: selectedSize };
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.push(product);
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -292,6 +360,8 @@ addToCartBtn.addEventListener('click', () => {
     setTimeout(() => {
         addToCartBtn.textContent = "Ajouter au panier";
     }, 1200);
+
+    updateMiniCart();
 });
 </script>
 
