@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>SILENCE – T-shirt</title>
 <style>
+/* ======== BASE & NAVBAR ======== */
 body {margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#f5f5f5;color:#111;}
 .navbar{position:fixed;top:0;left:0;width:100%;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;background:#ffffffcc;backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(0,0,0,0.1);z-index:100;box-sizing:border-box;}
 .nav-left{display:flex;align-items:center;gap:20px;}
@@ -15,6 +16,8 @@ body {margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#f5f5f5;
 .dropdown-menu a{display:block;padding:10px 20px;color:#111;text-decoration:none;}
 .dropdown-menu a:hover{background:rgba(0,0,0,0.05);}
 .dropdown.active .dropdown-menu{opacity:1;pointer-events:auto;transform:translateY(5px);}
+
+/* ======== CONTENU PRODUIT ======== */
 .content{padding-top:140px;max-width:900px;margin:0 auto;text-align:center;}
 .product-image img{width:100%;max-width:420px;border-radius:16px;box-shadow:0 8px 22px rgba(0,0,0,0.25);transition:transform 0.4s ease,box-shadow 0.4s ease;margin-bottom:30px;}
 .product-image img:hover{transform:scale(1.05);box-shadow:0 16px 40px rgba(0,0,0,0.4);}
@@ -29,6 +32,8 @@ h1{font-size:48px;margin-bottom:10px;letter-spacing:2px;}
 .add-to-cart::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);transition:all 0.6s ease;}
 .add-to-cart:hover::after{left:100%;}
 .add-to-cart:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,0.4);}
+
+/* ======== MINI-PANIER ======== */
 #mini-cart-dropdown{position:fixed;top:100px;right:20px;width:270px;z-index:200;font-family:"Helvetica Neue",Arial,sans-serif;}
 #toggle-cart{width:100%;padding:12px;background:linear-gradient(135deg,#111,#333);color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:14px;transition:all 0.3s ease;}
 #toggle-cart:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.4);}
@@ -55,27 +60,28 @@ h1{font-size:48px;margin-bottom:10px;letter-spacing:2px;}
             </div>
         </div>
     </div>
-    <div class="nav-right"><a href="Panier.html">Panier</a></div>
+    <div class="nav-right">
+        <a href="Panier.html">Panier</a>
+    </div>
 </div>
 
 <div class="content">
     <h1>T-shirt SILENCE</h1>
     <div class="price">35 €</div>
-    <div class="product-image"><img src="images/T-shirtClintEastwood.jpg" alt="T-shirt SILENCE"></div>
-    <div class="description">Conçu pour ceux qui avancent sans bruit.<br>Coupe droite, tissu premium, présence discrète.</div>
+    <div class="product-image">
+        <img src="images/T-shirtClintEastwood.jpg" alt="T-shirt SILENCE">
+    </div>
+    <div class="description">Coupe droite, tissu premium, style discret.</div>
     <div class="sizes">
         <span>XS</span><span>S</span><span>M</span><span>L</span><span>XL</span>
     </div>
     <button class="add-to-cart">Ajouter au panier</button>
 </div>
 
-<!-- MINI-PANIER DÉROULANT -->
+<!-- MINI-PANIER -->
 <div id="mini-cart-dropdown">
     <button id="toggle-cart">Ouvrir mon panier : 0 €</button>
-    <div id="mini-cart-items" class="cart-content">
-        <p class="empty-mini-cart">Aucun article</p>
-        <div class="total">Total : 0 €</div>
-    </div>
+    <div id="mini-cart-items" class="cart-content"></div>
 </div>
 
 <script>
@@ -88,57 +94,83 @@ document.addEventListener('click',e=>{if(!dropdown.contains(e.target)) dropdown.
 // Taille
 const sizes = document.querySelectorAll('.sizes span');
 let selectedSize = null;
-sizes.forEach(size=>{size.addEventListener('click',()=>{sizes.forEach(s=>s.classList.remove('active'));size.classList.add('active');selectedSize=size.textContent;});});
+sizes.forEach(s=>{
+    s.addEventListener('click',()=>{
+        sizes.forEach(x=>x.classList.remove('active'));
+        s.classList.add('active');
+        selectedSize = s.textContent;
+    });
+});
 
-// Mini-panier déroulant avec croix fonctionnelle
+// Mini-panier
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 const miniCartItemsDropdown = document.getElementById("mini-cart-items");
 const toggleCartBtn = document.getElementById("toggle-cart");
 
-function updateMiniCartDropdown(){
-    let total=0;
-    miniCartItemsDropdown.innerHTML="";
+function updateMiniCartDropdown() {
+    miniCartItemsDropdown.innerHTML = "";
     if(cart.length===0){
-        miniCartItemsDropdown.innerHTML='<p class="empty-mini-cart">Aucun article</p><div class="total">Total : 0 €</div>';
-    } else {
-        cart.forEach((item,index)=>{
-            total+=item.price;
-            const div=document.createElement("div");
-            div.classList.add("mini-cart-item");
-            div.innerHTML=`${item.name} – ${item.size} – ${item.price} € <span class="remove-item">❌</span>`;
-            // suppression fonctionnelle
-            const removeBtn = div.querySelector(".remove-item");
-            removeBtn.addEventListener("click",()=>{
-                cart.splice(index,1);
-                localStorage.setItem("cart",JSON.stringify(cart));
-                updateMiniCartDropdown();
-            });
-            miniCartItemsDropdown.appendChild(div);
-        });
-        miniCartItemsDropdown.innerHTML+=`<div class="total">Total : ${total} €</div>`;
+        const empty = document.createElement("p");
+        empty.classList.add("empty-mini-cart");
+        empty.textContent="Aucun article";
+        miniCartItemsDropdown.appendChild(empty);
+        const totalDiv=document.createElement("div");
+        totalDiv.classList.add("total");
+        totalDiv.textContent="Total : 0 €";
+        miniCartItemsDropdown.appendChild(totalDiv);
+        toggleCartBtn.textContent="Ouvrir mon panier : 0 €";
+        return;
     }
+    let total=0;
+    cart.forEach((item,index)=>{
+        total+=item.price;
+        const div=document.createElement("div");
+        div.classList.add("mini-cart-item");
+        const itemText=document.createElement("span");
+        itemText.textContent=`${item.name} – ${item.size} – ${item.price} €`;
+        div.appendChild(itemText);
+        const removeBtn=document.createElement("span");
+        removeBtn.classList.add("remove-item");
+        removeBtn.textContent="❌";
+        removeBtn.addEventListener("click",()=>{
+            cart.splice(index,1);
+            localStorage.setItem("cart",JSON.stringify(cart));
+            updateMiniCartDropdown();
+        });
+        div.appendChild(removeBtn);
+        miniCartItemsDropdown.appendChild(div);
+    });
+    const totalDiv=document.createElement("div");
+    totalDiv.classList.add("total");
+    totalDiv.textContent=`Total : ${total} €`;
+    miniCartItemsDropdown.appendChild(totalDiv);
     toggleCartBtn.textContent=`Ouvrir mon panier : ${total} €`;
 }
 
 toggleCartBtn.addEventListener("click",()=>{
     miniCartItemsDropdown.classList.toggle("open");
-    if(miniCartItemsDropdown.classList.contains("open")) toggleCartBtn.textContent="Fermer le panier";
-    else toggleCartBtn.textContent=`Ouvrir mon panier : ${cart.reduce((sum,item)=>sum+item.price,0)} €`;
+    if(miniCartItemsDropdown.classList.contains("open")){
+        toggleCartBtn.textContent="Fermer le panier";
+    } else {
+        const total=cart.reduce((sum,item)=>sum+item.price,0);
+        toggleCartBtn.textContent=`Ouvrir mon panier : ${total} €`;
+    }
 });
-updateMiniCartDropdown();
 
 // Ajouter au panier
 const addToCartBtn=document.querySelector('.add-to-cart');
 addToCartBtn.addEventListener('click',()=>{
     if(!selectedSize){alert("Veuillez sélectionner une taille avant d'ajouter au panier."); return;}
-    cart.push({name:"T-shirt SILENCE", size:selectedSize, price:35});
+    cart.push({name:"T-shirt SILENCE",size:selectedSize,price:35});
     localStorage.setItem("cart",JSON.stringify(cart));
     addToCartBtn.textContent="Ajouté ✓";
     setTimeout(()=>{addToCartBtn.textContent="Ajouter au panier";},1200);
     updateMiniCartDropdown();
 });
-</script>
 
+// Initialisation
+updateMiniCartDropdown();
+</script>
 </body>
 </html>
 
