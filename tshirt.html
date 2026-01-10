@@ -11,10 +11,9 @@ body {
     font-family: "Helvetica Neue", Arial, sans-serif;
     background: #f5f5f5;
     color: #111;
-    min-height: 100vh;
 }
 
-/* NAVBAR FIXE */
+/* NAVBAR */
 .navbar {
     position: fixed;
     top: 0;
@@ -25,6 +24,7 @@ body {
     justify-content: space-between;
     align-items: center;
     background: #ffffffcc;
+    backdrop-filter: blur(8px);
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     z-index: 100;
 }
@@ -36,7 +36,7 @@ body {
     color: #111;
 }
 
-/* MENU DROPDOWN */
+/* DROPDOWN */
 .dropdown {
     position: relative;
 }
@@ -47,7 +47,6 @@ body {
     padding: 8px 20px;
     white-space: nowrap;
     font-size: 16px;
-    color: #111;
 }
 
 .dropdown-menu {
@@ -63,8 +62,6 @@ body {
     pointer-events: none;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    z-index: 10;
-    white-space: nowrap;
 }
 
 .dropdown-menu a {
@@ -84,32 +81,82 @@ body {
     transform: translateX(-50%) translateY(5px);
 }
 
-/* CONTENU PRODUIT */
+/* CONTENU */
 .content {
-    padding-top: 100px;
+    padding-top: 120px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
     text-align: center;
 }
 
 h1 {
     font-size: 48px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.price {
+    font-size: 26px;
     margin-bottom: 20px;
+    font-weight: 500;
 }
 
 .product-image {
-    margin: 0 auto 20px auto;
-    max-width: 400px;
+    max-width: 420px;
+    margin: 0 auto 25px;
 }
 
 .product-image img {
     width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
-p {
-    font-size: 20px;
-    opacity: 0.8;
+/* DESCRIPTION */
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    opacity: 0.85;
+    margin-bottom: 30px;
+}
+
+/* TAILLES */
+.sizes {
+    margin-bottom: 30px;
+}
+
+.sizes span {
+    display: inline-block;
+    margin: 0 8px;
+    padding: 10px 16px;
+    border: 1px solid #111;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sizes span:hover {
+    background: #111;
+    color: #fff;
+}
+
+/* BOUTON PANIER */
+.add-to-cart {
+    display: inline-block;
+    padding: 14px 40px;
+    background: #111;
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.add-to-cart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 </style>
 </head>
@@ -130,10 +177,26 @@ p {
 
 <div class="content">
     <h1>T-shirt SILENCE</h1>
+    <div class="price">35 €</div>
+
     <div class="product-image">
-        <img src="images/T-shirtClintEastwood.jpg" alt="T-shirt SILENCE">
+        <img src="images/tshirt.jpg" alt="T-shirt SILENCE">
     </div>
-    <p>Minimal. Pur. Essentiel.</p>
+
+    <div class="description">
+        Conçu pour ceux qui avancent sans bruit.  
+        Coupe droite, tissu premium, présence discrète.  
+        Le silence comme signature.
+    </div>
+
+    <div class="sizes">
+        <span>S</span>
+        <span>M</span>
+        <span>L</span>
+        <span>XL</span>
+    </div>
+
+    <a href="#" class="add-to-cart">Ajouter au panier</a>
 </div>
 
 <script>
