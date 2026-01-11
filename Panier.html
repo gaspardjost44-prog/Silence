@@ -183,9 +183,7 @@ h1 { margin-bottom: 30px; letter-spacing: 2px; font-size: 36px; }
                 <th>Supprimer</th>
             </tr>
         </thead>
-        <tbody id="cart-items">
-            <!-- Les articles seront ajoutés via JS -->
-        </tbody>
+        <tbody id="cart-items"></tbody>
     </table>
 
     <div class="total">Total : <span id="cart-total">0</span> €</div>
@@ -197,7 +195,7 @@ h1 { margin-bottom: 30px; letter-spacing: 2px; font-size: 36px; }
 /* DROPDOWN */
 const dropdownBtn = document.querySelector('.dropdown-button');
 const dropdown = document.querySelector('.dropdown');
-dropdownBtn.addEventListener('click',()=>dropdown.classList.toggle('active'));
+dropdownBtn.addEventListener('click', ()=>dropdown.classList.toggle('active'));
 document.addEventListener('click', e => { if(!dropdown.contains(e.target)) dropdown.classList.remove('active'); });
 
 /* PANIER */
@@ -206,7 +204,7 @@ const cartItemsTable = document.getElementById("cart-items");
 const totalElem = document.getElementById("cart-total");
 const emptyCartMsg = document.querySelector(".empty-cart");
 
-function renderCart(){
+function renderCart() {
     cartItemsTable.innerHTML = "";
     let total = 0;
 
@@ -237,20 +235,12 @@ function renderCart(){
 
     totalElem.textContent = total;
 }
-
 renderCart();
 
-/* STRIPE PAIEMENT */
-document.addEventListener("DOMContentLoaded", () => {
+/* PAIEMENT STRIPE */
+const payButton = document.getElementById("pay-button");
 
-    const payButton = document.getElementById("pay-button");
-
-    if(!payButton){
-        console.error("Bouton de paiement introuvable");
-        return;
-    }
-
-   payButton.addEventListener("click", async () => {
+payButton.addEventListener("click", async () => {
     if(cart.length === 0){
         alert("Votre panier est vide !");
         return;
@@ -266,17 +256,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await response.json();
 
         if(data.url){
-            window.location.href = data.url; // redirection vers Stripe
+            window.location.href = data.url; // Redirige vers Stripe Checkout
         } else {
+            console.error("Erreur Stripe :", data);
             alert("Erreur lors de la création du paiement");
-            console.error(data);
         }
+
     } catch (error) {
+        console.error("Erreur réseau :", error);
         alert("Problème de connexion au serveur");
-        console.error(error);
     }
 });
-
-
-});
 </script>
+
+</body>
+</html>
