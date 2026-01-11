@@ -247,7 +247,7 @@ payButton.addEventListener("click", async () => {
     }
 
     try {
-        const response = await fetch("https://silence-backend-murex.vercel.app/api/create-checkout-session", {
+        const response = await fetch("https://silence-backend-three.vercel.app/api/create-checkout-session", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ items: cart })
